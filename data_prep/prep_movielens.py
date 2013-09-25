@@ -30,7 +30,7 @@ if __name__ == "__main__":
         NNZ += 1
         rating_list.append([fields[0], fields[1], fields[2]])
 
-    oid.write('%%MatrixMarket matrix coordinate real general')
+    oid.write('%%MatrixMarket matrix coordinate real general\n')
     oid.write(str(M) + ' ' + str(N) + ' ' + str(NNZ) + '\n')
     for rating in rating_list:
         oid.write(rating[0] + ' ' + rating[1] + ' ' + rating[2] + '\n')
