@@ -19,7 +19,7 @@ if __name__ == "__main__":
     
     for line in fid:
         if NNZ % 100000 == 0:
-            print str(NNZ) + '\n'
+            print str(NNZ)
         fields = line.split('::')
         if not fields[0] in dict_m:
             M += 1
