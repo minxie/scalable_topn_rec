@@ -33,7 +33,7 @@ if __name__ == "__main__":
     oid.write('%%MatrixMarket matrix coordinate real general\n')
     oid.write(str(M) + ' ' + str(N) + ' ' + str(NNZ) + '\n')
     for rating in rating_list:
-        oid.write(rating[0] + ' ' + rating[1] + ' ' + rating[2] + '\n')
+        oid.write(str(rating[0]) + ' ' + str(rating[1]) + ' ' + rating[2] + '\n')
 
     fid.close()
     oid.close()
