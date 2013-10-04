@@ -23,12 +23,12 @@ if __name__ == "__main__":
         fields = line.split('::')
         if not fields[0] in dict_m:
             M += 1
-            dict_m[fields[0]] = 1
+            dict_m[fields[0]] = M
         if not fields[1] in dict_n:
             N += 1
-            dict_n[fields[1]] = 1
+            dict_n[fields[1]] = N
         NNZ += 1
-        rating_list.append([fields[0], fields[1], fields[2]])
+        rating_list.append([dict_m[fields[0]], dict_n[fields[1]], fields[2]])
 
     oid.write('%%MatrixMarket matrix coordinate real general\n')
     oid.write(str(M) + ' ' + str(N) + ' ' + str(NNZ) + '\n')
