@@ -22,8 +22,9 @@ if __name__ == "__main__":
         first_line_flag = 1
         for line in fid:
             if first_line_flag == 1:
-                itemid = line[:-1]
-                print line + itemid
+                line_content = line.rstrip()
+                itemid = line_content[:-1]
+                print line_content + itemid
                 first_line_flag = 0
                 continue
             fields = line.split(',')
