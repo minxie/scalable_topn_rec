@@ -2,6 +2,7 @@
 Matrix factorization based on SGD
 '''
 
+import numpy as np
 from mf_machine import MFMachine
 from random import shuffle
 
@@ -11,6 +12,8 @@ class SGDMachine(MFMachine):
         MFMachine.__init__(self, model, data)
 
     def train(self, params):
+        np.seterr(all='raise')
+
         sgd_gamma = params.p_gamma
         sgd_lambda = params.p_lambda
 
@@ -31,15 +34,16 @@ class SGDMachine(MFMachine):
                     err = obsv - self._model.predict(user, item)
                     rmse_err += err * err
 
-                    self._model.P[user, ] += sgd_gamma * (err * self._model.Q[item, ] - sgd_lambda * self._model.P[user, ])
-                    self._model.Q[item, ] += sgd_gamma * (err * self._model.P[user, ] - sgd_lambda * self._model.Q[item, ])
+                    self._model.P[user, ] += sgd_gamma * (err * self._model.Q[item, ]
+                                                          - sgd_lambda * self._model.P[user, ])
+                    self._model.Q[item, ] += sgd_gamma * (err * self._model.P[user, ]
+                                                          - sgd_lambda * self._model.Q[item, ])
                 except Exception:
                     print user
                     print item
                     print err
                     print self._model.P[user, ]
                     print self._model.Q[item, ]
-                    
 
             # Update parameters
             sgd_gamma *= params.p_step_dec
