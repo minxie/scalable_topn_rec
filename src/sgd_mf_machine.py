@@ -25,19 +25,21 @@ class SGDMachine(MFMachine):
                 user = self._data.ratings[idx][0]
                 item = self._data.ratings[idx][1]
                 obsv = self._data.ratings[idx][2]
+                err = 0.0
 
-                err = obsv - self._model.predict(user, item)
-                rmse_err += err * err
-                # Should check numerical errors
-                print err
-                print self._model.P[user, ]
-                print self._model.Q[item, ]
-                
-                self._model.P[user, ] += sgd_gamma * (err * self._model.Q[item, ] - sgd_lambda * self._model.P[user, ])
-                self._model.Q[item, ] += sgd_gamma * (err * self._model.P[user, ] - sgd_lambda * self._model.Q[item, ])
+                try:
+                    err = obsv - self._model.predict(user, item)
+                    rmse_err += err * err
 
-                print self._model.P[user, ]
-                print self._model.Q[item, ]
+                    self._model.P[user, ] += sgd_gamma * (err * self._model.Q[item, ] - sgd_lambda * self._model.P[user, ])
+                    self._model.Q[item, ] += sgd_gamma * (err * self._model.P[user, ] - sgd_lambda * self._model.Q[item, ])
+                except Exception:
+                    print user
+                    print item
+                    print err
+                    print self._model.P[user, ]
+                    print self._model.Q[item, ]
+                    
 
             # Update parameters
             sgd_gamma *= params.p_step_dec
