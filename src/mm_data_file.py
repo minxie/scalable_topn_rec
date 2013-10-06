@@ -19,6 +19,7 @@ class MMDataFile(DataFile):
                 line_num += 1
                 continue
             line = line.rstrip()
+            print line
             fields = line.split(' ')
             self.ratings.append([int(fields[0]) - 1, int(fields[1]) - 1, float(fields[2])])
 
