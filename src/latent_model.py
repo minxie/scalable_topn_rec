@@ -23,6 +23,6 @@ class LatentModel:
     '''Predict score for user i(0:) and item j(0:)'''
     def predict(self, i, j):
         pred_rating = self.P[i,].dot(self.Q[j,])
-        pred_rating = max(pred_rating, minval)
-        pred_rating = min(pred_rating, maxval)
+        pred_rating = max(pred_rating, LatentModel.minval)
+        pred_rating = min(pred_rating, LatentModel.maxval)
         return pred_rating
