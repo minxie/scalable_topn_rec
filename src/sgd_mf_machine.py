@@ -29,9 +29,15 @@ class SGDMachine(MFMachine):
                 err = obsv - self._model.predict(user, item)
                 rmse_err += err * err
                 # Should check numerical errors
-
+                print err
+                print self._model.P[user, ]
+                print self._model.Q[item, ]
+                
                 self._model.P[user, ] += sgd_gamma * (err * self._model.Q[item, ] - sgd_lambda * self._model.P[user, ])
                 self._model.Q[item, ] += sgd_gamma * (err * self._model.P[user, ] - sgd_lambda * self._model.Q[item, ])
+
+                print self._model.P[user, ]
+                print self._model.Q[item, ]
 
             # Update parameters
             sgd_gamma *= params.p_step_dec
