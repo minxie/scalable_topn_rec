@@ -6,6 +6,7 @@ import numpy as np
 from mf_machine import MFMachine
 from random import shuffle
 import sys
+import math
 
 
 class SGDMachine(MFMachine):
