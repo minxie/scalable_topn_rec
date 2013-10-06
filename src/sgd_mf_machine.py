@@ -40,6 +40,7 @@ class SGDMachine(MFMachine):
                     self._model.Q[item, ] += sgd_gamma * (err * self._model.P[user, ]
                                                           - sgd_lambda * self._model.Q[item, ])
                 except Exception:
+                    print Exception.strerror
                     print user
                     print item
                     print obsv
