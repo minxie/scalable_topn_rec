@@ -20,6 +20,6 @@ class MMDataFile(DataFile):
                 continue
             line = line.rstrip()
             fields = line.split(' ')
-            self.ratings.append([int(fields[0])-1, int(fields[1])-1], float(fields[2]))
+            self.ratings.append([int(fields[0]) - 1, int(fields[1]) - 1, float(fields[2])])
 
         fid.close()
