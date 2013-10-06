@@ -53,4 +53,4 @@ class SGDMachine(MFMachine):
             sgd_gamma *= params.p_step_dec
 
             # Possible convergence check
-            print rmse_err
+            print math.sqrt(rmse_err / len(self._data.ratings))
