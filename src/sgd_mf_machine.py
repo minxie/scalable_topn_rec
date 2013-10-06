@@ -46,7 +46,7 @@ class SGDMachine(MFMachine):
                     print err
                     print self._model.P[user, ]
                     print self._model.Q[item, ]
-                    sys.exit("Numerical erros met!!!")
+                    sys.exit("Numerical errors met!!!")
 
             # Update parameters
             sgd_gamma *= params.p_step_dec
