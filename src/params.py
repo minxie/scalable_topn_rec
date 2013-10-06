@@ -30,6 +30,10 @@ class Params:
                             help='Lambda for the regularizer.')
         parser.add_argument('-g', nargs='?', dest='g', default=1e-3, type=float,
                             help='Gamma for the gradient descent.')
+        parser.add_argument('-i', nargs='?', dest='i', default=5, type=int,
+                            help='Max # of iterations.')
+        parser.add_argument('-sd', nargs='?', dest='sd', default=0.9, type=float,
+                            help='SGD step decrement.')
         parser.add_argument('-tr', nargs='?', dest='tr', default="", type=str,
                             help='Training file location.')
         parser.add_argument('-te', nargs='?', dest='te', default="", type=str,
@@ -41,6 +45,8 @@ class Params:
         self.p_N = args.n
         self.p_lambda = args.l
         self.p_gamma = args.g
+        self.p_max_i = args.i
+        self.p_step_dec = args.sd
         self.p_train_f_loc = args.tr
         self.p_test_f_loc = args.te
 
