@@ -9,14 +9,14 @@ import numpy as np
 class LatentModel:
     def __init__(self, params):
         self._params = params
-        # Randomly initiate matrixes with values from -1e-3 to 1e-3
-        self.P = 2e-3 * np.random.random_sample((params.p_M, params.p_D)) - 1e-3
-        self.Q = 2e-3 * np.random.random_sample((params.p_N, params.p_D)) - 1e-3
+        # Randomly initiate matrixes with values from 0 to 1
+        self.P = np.random.random_sample((params.p_M, params.p_D))
+        self.Q = np.random.random_sample((params.p_N, params.p_D))
 
     def reset(self):
         # Randomly initiate matrixes with values from -1e-3 to 1e-3
-        self.P = 2e-3 * np.random.random_sample((self._params.p_M, self._params.p_D)) - 1e-3
-        self.Q = 2e-3 * np.random.random_sample((self._params.p_N, self._params.p_D)) - 1e-3
+        self.P = np.random.random_sample((self._params.p_M, self._params.p_D))
+        self.Q = np.random.random_sample((self._params.p_N, self._params.p_D))
 
     '''Predict score for user i(0:) and item j(0:)'''
     def predict(self, i, j):
