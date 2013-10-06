@@ -5,6 +5,7 @@ Matrix factorization based on SGD
 import numpy as np
 from mf_machine import MFMachine
 from random import shuffle
+import sys
 
 
 class SGDMachine(MFMachine):
@@ -41,9 +42,11 @@ class SGDMachine(MFMachine):
                 except Exception:
                     print user
                     print item
+                    print obsv
                     print err
                     print self._model.P[user, ]
                     print self._model.Q[item, ]
+                    sys.exit("Numerical erros met!!!")
 
             # Update parameters
             sgd_gamma *= params.p_step_dec
