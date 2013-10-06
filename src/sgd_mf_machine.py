@@ -31,6 +31,7 @@ class SGDMachine(MFMachine):
                 item = self._data.ratings[idx][1]
                 obsv = self._data.ratings[idx][2]
                 err = 0.0
+                print err
 
                 try:
                     err = obsv - self._model.predict(user, item)
