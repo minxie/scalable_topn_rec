@@ -31,11 +31,11 @@ class SGDMachine(MFMachine):
                 item = self._data.ratings[idx][1]
                 obsv = self._data.ratings[idx][2]
                 err = 0.0
-                print err
 
                 try:
                     err = obsv - self._model.predict(user, item)
                     rmse_err += err * err
+                    print err
 
                     self._model.P[user, ] += sgd_gamma * (err * self._model.Q[item, ]
                                                           - sgd_lambda * self._model.P[user, ])
