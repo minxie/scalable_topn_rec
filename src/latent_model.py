@@ -6,8 +6,8 @@ training and testing, those should be defined in a separate class.
 import numpy as np
 
 class LatentModel:
-    minval = 1e-10
-    maxval = 1e10
+    minval = 1e-100
+    maxval = 1e100
     
     def __init__(self, params):
         self._params = params
