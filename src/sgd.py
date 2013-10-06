@@ -19,9 +19,11 @@ if __name__ == "__main__":
     # Handling I/O things
     data = MMDataFile()
     data.read_file(params)
+    print "File load successful..."
     
     # Run the actual training program
     program = SGDMachine(model, data)
     program.train(params)
+    print "Model training complete..."
 
     # Cleanup
