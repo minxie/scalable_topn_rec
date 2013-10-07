@@ -21,8 +21,10 @@ class MMDataFile(DataFile):
             line = line.rstrip()
             fields = line.split()
 
+            # Check whether there will be some weird ratings ...
             if (float(fields[2]) > 100):
                 print line
+                print line_num
                 print fields[0]
                 print fields[1]
                 print fields[2]
