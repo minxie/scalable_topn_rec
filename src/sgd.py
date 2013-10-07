@@ -8,7 +8,6 @@ from mm_data_file import MMDataFile
 from sgd_mf_machine_cython import SGDMachine
 import time
 import numpy as np
-cimport numpy as np
 
 
 if __name__ == "__main__":
