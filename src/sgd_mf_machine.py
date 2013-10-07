@@ -35,15 +35,6 @@ class SGDMachine(MFMachine):
                 try:
                     err = obsv - self._model.predict(user, item)
                     rmse_err += err * err
-                    if (abs(err) > 100):
-                        print user
-                        print item
-                        print obsv
-                        print err
-                        print self._model.P[user, ]
-                        print self._model.Q[item, ]
-                        input("Debug:")
-
                     self._model.P[user, ] += sgd_gamma * (err * self._model.Q[item, ]
                                                           - sgd_lambda * self._model.P[user, ])
                     self._model.Q[item, ] += sgd_gamma * (err * self._model.P[user, ]
