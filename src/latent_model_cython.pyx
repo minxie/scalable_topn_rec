@@ -6,14 +6,7 @@ training and testing, those should be defined in a separate class.
 import numpy as np
 cimport numpy as np
 
-cdef class LatentModel:
-    cdef double minval
-    cdef double maxval
-
-    cdef public int M
-    cdef public int N
-    cdef public int D
-
+class LatentModel:
     def __init__(self, params):
         self.minval = 1e-100
         self.maxval = 1e100
@@ -28,9 +21,9 @@ cdef class LatentModel:
         Q = np.random.random_sample((self.N, self.D))
 
     '''Predict score for user i(0:) and item j(0:)'''
-    cdef double predict(self, int i, int j,
-                        np.ndarray[np.float64_t, ndim=2] P,
-                        np.ndarray[np.float64_t, ndim=2] Q):
+    def predict(self, int i, int j,
+                np.ndarray[np.float64_t, ndim=2] P,
+                np.ndarray[np.float64_t, ndim=2] Q):
         cdef double pred_rating = P[i, ].dot(Q[j, ])
         pred_rating = max(pred_rating, self.minval)
         pred_rating = min(pred_rating, self.maxval)
