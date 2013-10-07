@@ -15,6 +15,7 @@ class MMDataFile(DataFile):
 
         line_num = 1
         for line in fid:
+            print line
             if line_num <= 2:
                 line_num += 1
                 continue
