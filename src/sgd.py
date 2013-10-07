@@ -5,7 +5,8 @@ This implements the standard SGD algorithm
 from params import Params
 from latent_model import LatentModel
 from mm_data_file import MMDataFile
-from sgd_mf_machine import SGDMachine
+from sgd_mf_machine_cython import SGDMachine
+import time
 
 
 if __name__ == "__main__":
@@ -25,7 +26,7 @@ if __name__ == "__main__":
     program = SGDMachine(model, data)
     start = time.clock()
     program.train(params)
-    proc_time = (time.clock() - start)
+    (time.clock() - start)
     
     print "Model training complete... Time: " + str(proc_time)
 
