@@ -23,7 +23,10 @@ if __name__ == "__main__":
     
     # Run the actual training program
     program = SGDMachine(model, data)
+    start = time.clock()
     program.train(params)
-    print "Model training complete..."
+    proc_time = (time.clock() - start)
+    
+    print "Model training complete... Time: " + str(proc_time)
 
     # Cleanup
