@@ -13,23 +13,11 @@ class MMDataFile(DataFile):
         data_file = params.p_train_f_loc
         fid = open(data_file, 'r')
 
-        line_num = 1
         for line in fid:
-            print line
-            if line_num <= 2:
-                line_num += 1
+            if line[0] = '\%':
                 continue
             line = line.rstrip()
             fields = line.split()
-
-            # Check whether there will be some weird ratings ...
-            if (float(fields[2]) > 100):
-                print line
-                print line_num
-                print fields[0]
-                print fields[1]
-                print fields[2]
-                input("Debug:")
             
             self.ratings.append([int(fields[0]) - 1, int(fields[1]) - 1, float(fields[2])])
 
