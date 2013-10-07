@@ -5,18 +5,20 @@ Matrix factorization based on SGD
 import numpy as np
 cimport numpy as np
 
-from mf_machine import MFMachine
+from mf_machine_cython cimport MFMachine
 import random
 import sys
 import math
 import time
 
 
-class SGDMachine(MFMachine):
+cdef class SGDMachine(MFMachine):
     def __init__(self, model, data):
         MFMachine.__init__(self, model, data)
 
-    def train(self, params):
+    cdef void train(self, params,
+                    np.ndarray[np.float64_t, ndim=2] P,
+                    np.ndarray[np.float64_t, ndim=2] Q):
         np.seterr(all='raise')
 
         cdef double sgd_gamma = params.p_gamma
@@ -48,10 +50,10 @@ class SGDMachine(MFMachine):
                 rmse_err += err * err
                 D = params.p_D
                 for i in xrange(D):
-                    self._model.P[user, i] += sgd_gamma * (err * self._model.Q[item, i]
-                                                           - sgd_lambda * self._model.P[user, i])
-                    self._model.Q[item, i] += sgd_gamma * (err * self._model.P[user, i]
-                                                           - sgd_lambda * self._model.Q[item, i])
+                    P[user, i] += sgd_gamma * (err * Q[item, i]
+                                               - sgd_lambda * P[user, i])
+                    Q[item, i] += sgd_gamma * (err * P[user, i]
+                                               - sgd_lambda * Q[item, i])
 
             # Update parameters
             sgd_gamma *= params.p_step_dec
