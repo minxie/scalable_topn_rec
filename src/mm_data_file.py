@@ -18,6 +18,7 @@ class MMDataFile(DataFile):
             print line
             if line[0] == '%':
                 continue
+            input("Debug:")
             line = line.rstrip()
             fields = line.split()
             
