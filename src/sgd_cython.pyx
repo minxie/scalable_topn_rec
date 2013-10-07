@@ -3,7 +3,7 @@ This implements the standard SGD algorithm
 '''
 
 from params import Params
-from latent_model import LatentModel
+from latent_model_cython import LatentModel
 from mm_data_file import MMDataFile
 from sgd_mf_machine_cython import SGDMachine
 import time

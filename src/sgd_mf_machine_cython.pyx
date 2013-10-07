@@ -46,7 +46,7 @@ class SGDMachine(MFMachine):
                 obsv = data.ratings[idx][2]
                 err = 0.0
 
-                err = obsv - model.predict(user, item)
+                err = obsv - model.predict(user, item, P, Q)
                 rmse_err += err * err
                 D = params.p_D
                 for i in xrange(D):
