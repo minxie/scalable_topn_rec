@@ -60,4 +60,4 @@ class SGDMachine(MFMachine):
 
             # Possible convergence check
             print "Iteration Time: " + str(time.clock() - start)
-            print math.sqrt(rmse_err / len(self._data.ratings))
+            print math.sqrt(rmse_err / len(data.ratings))

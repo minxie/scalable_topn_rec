@@ -31,9 +31,7 @@ cdef class LatentModel:
     cdef double predict(self, int i, int j,
                         np.ndarray[np.float64_t, ndim=2] P,
                         np.ndarray[np.float64_t, ndim=2] Q):
-        cdef double pred_rating = 0.0
-        for k in xrange(self.D):
-            pred_rating += P[i, k] * Q[j, k]
+        cdef double pred_rating = P[i, ].dot(Q[j, ])
         pred_rating = max(pred_rating, self.minval)
         pred_rating = min(pred_rating, self.maxval)
         return pred_rating
