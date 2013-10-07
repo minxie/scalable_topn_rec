@@ -22,7 +22,7 @@ class SGDMachine(MFMachine):
         processing_order = range(len(self._data.ratings))
         for tr_iter in xrange(params.p_max_i):
             # Shuffling order of processing the tuples
-            # random.shuffle(processing_order)
+            random.shuffle(processing_order)
 
             # Run through all training examples
             rmse_err = 0.0
