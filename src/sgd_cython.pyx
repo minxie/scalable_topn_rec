@@ -21,8 +21,8 @@ def run():
     params.print_params()
     
     model = LatentModel(params)
-    P = np.random.random_sample((model.M, model.D))
-    Q = np.random.random_sample((model.N, model.D))
+    P = np.random.random_sample((LatentModel.M, LatentModel.D))
+    Q = np.random.random_sample((LatentModel.N, LatentModel.D))
     
     # Handling I/O things
     data = MMDataFile()
