@@ -4,7 +4,7 @@ Matrix factorization based on SGD
 
 import numpy as np
 from mf_machine import MFMachine
-from random import shuffle
+import random
 import sys
 import math
 
@@ -22,7 +22,7 @@ class SGDMachine(MFMachine):
         processing_order = range(len(self._data.ratings))
         for tr_iter in xrange(params.p_max_i):
             # Shuffling order of processing the tuples
-            shuffle(processing_order)
+            # random.shuffle(processing_order)
 
             # Run through all training examples
             rmse_err = 0.0
