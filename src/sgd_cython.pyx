@@ -30,7 +30,7 @@ def run():
     print "File load successful..."
     
     # Run the actual training program
-    program = SGDMachine()
+    program = SGDMachine(model, data)
     start = time.clock()
     program.train(params, model, data, P, Q)
     proc_time = (time.clock() - start)
