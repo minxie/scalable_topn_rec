@@ -6,6 +6,5 @@ import numpy as np
 
 
 cdef class MFMachine:
-    def __init__(self, model, data):
-        self._model = model
-        self._data = data
+    def __init__(self):
+        pass

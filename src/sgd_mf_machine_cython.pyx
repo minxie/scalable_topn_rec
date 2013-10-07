@@ -13,10 +13,10 @@ import time
 
 
 cdef class SGDMachine(MFMachine):
-    def __init__(self, model, data):
-        MFMachine.__init__(self, model, data)
+    def __init__(self):
+        MFMachine.__init__(self)
 
-    cdef void train(self, params,
+    cdef void train(self, params, model, data,
                     np.ndarray[np.float64_t, ndim=2] P,
                     np.ndarray[np.float64_t, ndim=2] Q):
         np.seterr(all='raise')
@@ -31,7 +31,7 @@ cdef class SGDMachine(MFMachine):
         cdef double err = -1.0
         cdef int D = 0
 
-        processing_order = range(len(self._data.ratings))
+        processing_order = range(len(data.ratings))
         for tr_iter in xrange(params.p_max_i):
             start = time.clock()
             
@@ -41,12 +41,12 @@ cdef class SGDMachine(MFMachine):
             # Run through all training examples
             rmse_err = 0.0
             for idx in processing_order:
-                user = self._data.ratings[idx][0]
-                item = self._data.ratings[idx][1]
-                obsv = self._data.ratings[idx][2]
+                user = data.ratings[idx][0]
+                item = data.ratings[idx][1]
+                obsv = data.ratings[idx][2]
                 err = 0.0
 
-                err = obsv - self._model.predict(user, item)
+                err = obsv - model.predict(user, item)
                 rmse_err += err * err
                 D = params.p_D
                 for i in xrange(D):
