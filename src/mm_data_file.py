@@ -13,12 +13,13 @@ class MMDataFile(DataFile):
         data_file = params.p_train_f_loc
         fid = open(data_file, 'r')
 
+        first_line_flag = 1
         for line in fid:
-            print line[0]
-            print line
             if line[0] == '%':
                 continue
-            input("Debug:")
+            if first_line_flag:
+                first_line_flag = 0
+                continue
             line = line.rstrip()
             fields = line.split()
             
