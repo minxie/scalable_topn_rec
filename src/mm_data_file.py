@@ -14,7 +14,7 @@ class MMDataFile(DataFile):
         fid = open(data_file, 'r')
 
         for line in fid:
-            if line[0] = '\%':
+            if line[0] == '\%':
                 continue
             line = line.rstrip()
             fields = line.split()
