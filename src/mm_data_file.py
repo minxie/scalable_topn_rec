@@ -14,6 +14,8 @@ class MMDataFile(DataFile):
         fid = open(data_file, 'r')
 
         for line in fid:
+            print line[0]
+            print line
             if line[0] == '%':
                 continue
             line = line.rstrip()
