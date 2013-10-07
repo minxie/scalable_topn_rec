@@ -13,8 +13,8 @@ import time
 
 
 class SGDMachine(MFMachine):
-    def __init__(self, model, data):
-        MFMachine.__init__(self, model, data)
+    def __init__(self):
+        MFMachine.__init__(self)
 
     def train(self, params, model, data,
               np.ndarray[np.float64_t, ndim=2] P,
