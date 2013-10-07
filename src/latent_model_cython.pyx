@@ -10,9 +10,9 @@ cdef class LatentModel:
     cdef double minval
     cdef double maxval
 
-    cdef int M
-    cdef int N
-    cdef int D
+    cdef public int M
+    cdef public int N
+    cdef public int D
 
     def __init__(self, params):
         self.minval = 1e-100
