@@ -2,6 +2,7 @@
 Matrix factorization based on SGD
 '''
 
+import numpy as np
 cimport numpy as np
 import bottleneck as bn
 
