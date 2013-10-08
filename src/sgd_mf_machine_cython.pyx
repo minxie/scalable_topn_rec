@@ -7,6 +7,10 @@ cimport numpy as np
 import bottleneck as bn
 from libcpp.vector cimport vector
 
+ctypedef vector[double].iterator diter
+cdef extern from "<algorithm>" namespace "std":
+    void partial_sort(diter, diter, diter)
+
 from mf_machine import MFMachine
 import random
 import sys
@@ -76,6 +80,7 @@ class SGDMachine(MFMachine):
             for i in xrange(M):
                 for j in xrange(N):
                     itemlist[j] = P[i, ].dot(Q[j, ])
+                partial_sort(itemlist.begin(), itemlist.begin()+10, itemlist.end())
                 # bn.partsort(itemlist, 10)
 
             print "Top-N Time: " + str(time.clock() - start)
