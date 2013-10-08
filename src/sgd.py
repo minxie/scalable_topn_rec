@@ -24,9 +24,9 @@ if __name__ == "__main__":
     print "File load successful..."
     
     # Run the actual training program
-    program = SGDMachine(model, data)
+    program = SGDMachine()
     start = time.clock()
-    program.train(params)
+    program.train(params, model, data)
     proc_time = (time.clock() - start)
     
     print "Model training complete... Time: " + str(proc_time)
