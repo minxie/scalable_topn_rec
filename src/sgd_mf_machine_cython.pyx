@@ -41,7 +41,7 @@ class SGDMachine(MFMachine):
 
         cdef np.ndarray[np.float64_t, ndim=2] X
 
-        cdef np.ndarray[np.float64_t, ndim=1] itemlist
+        # cdef np.ndarray[np.float64_t, ndim=1] itemlist
         # cdef vector[double] itemlist
         # itemlist.resize(N)
 
