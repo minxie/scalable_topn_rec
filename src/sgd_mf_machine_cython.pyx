@@ -2,8 +2,8 @@
 Matrix factorization based on SGD
 '''
 
-import numpy as np
 cimport numpy as np
+import bottleneck as bn
 
 from mf_machine import MFMachine
 import random
@@ -29,7 +29,11 @@ class SGDMachine(MFMachine):
         cdef int item = -1
         cdef double obsv = -1.0
         cdef double err = -1.0
-        cdef int D = 0
+        cdef int D = params.p_D
+        cdef int M = params.p_M
+        cdef int N = params.p_N
+
+        cdef np.ndarray[np.float64_t, ndim=1] itemlist
 
         processing_order = range(len(data.ratings))
         for tr_iter in xrange(params.p_max_i):
@@ -48,7 +52,6 @@ class SGDMachine(MFMachine):
 
                 err = obsv - model.predict(user, item, P, Q)
                 rmse_err += err * err
-                D = params.p_D
                 for i in xrange(D):
                     P[user, i] += sgd_gamma * (err * Q[item, i]
                                                - sgd_lambda * P[user, i])
@@ -61,3 +64,14 @@ class SGDMachine(MFMachine):
             # Possible convergence check
             print "Iteration Time: " + str(time.clock() - start)
             print math.sqrt(rmse_err / len(data.ratings))
+
+            # Getting top-N recommendation for every user
+            start = time.clock()
+
+            itemlist = np.empty(N, dtype=np.float64)
+            for i in xrange(M):
+                for j in xrange(N):
+                    itemlist[j] = P[i, ].dot(Q[j, ])
+                bn.partsort(itemlist, 10)
+
+            print "Top-N Time: " + str(time.clock() - start)
