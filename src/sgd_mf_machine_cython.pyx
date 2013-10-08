@@ -5,6 +5,7 @@ Matrix factorization based on SGD
 import numpy as np
 cimport numpy as np
 import bottleneck as bn
+from libcpp.vector cimport vector
 
 from mf_machine import MFMachine
 import random
@@ -34,7 +35,8 @@ class SGDMachine(MFMachine):
         cdef int M = params.p_M
         cdef int N = params.p_N
 
-        cdef np.ndarray[np.float64_t, ndim=1] itemlist
+        # cdef np.ndarray[np.float64_t, ndim=1] itemlist
+        cdef vector[double] itemlist
 
         processing_order = range(len(data.ratings))
         for tr_iter in xrange(params.p_max_i):
@@ -69,10 +71,10 @@ class SGDMachine(MFMachine):
             # Getting top-N recommendation for every user
             start = time.clock()
 
-            itemlist = np.empty(N, dtype=np.float64)
+            # itemlist = np.empty(N, dtype=np.float64)
             for i in xrange(M):
                 for j in xrange(N):
-                    itemlist[j] = P[i, ].dot(Q[j, ])
-                bn.partsort(itemlist, 10)
+                    itemlist.push_back(P[i, ].dot(Q[j, ]))
+                # bn.partsort(itemlist, 10)
 
             print "Top-N Time: " + str(time.clock() - start)
