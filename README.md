@@ -5,7 +5,7 @@ scalable_topn_rec
 * cd graphchi_cpp
 * ./install.sh # Eigen
 * git clone https://github.com/minxie/graphchi_mf_topn_index.git myapps
----
+
 * Running cython
 ```
 source VirtualEnv/bin/activate
