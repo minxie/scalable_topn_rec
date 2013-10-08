@@ -39,6 +39,8 @@ class SGDMachine(MFMachine):
         cdef int M = params.p_M
         cdef int N = params.p_N
 
+        cdef np.ndarray[np.float64_t, ndim=2] X
+
         # cdef np.ndarray[np.float64_t, ndim=1] itemlist
         cdef vector[double] itemlist
         itemlist.resize(N)
@@ -77,9 +79,11 @@ class SGDMachine(MFMachine):
             start = time.clock()
 
             # itemlist = np.empty(N, dtype=np.float64)
+            X = P.dot(Q.T)
             for i in xrange(M):
                 for j in xrange(N):
-                    itemlist[j] = P[i, ].dot(Q[j, ])
+                    # itemlist[j] = P[i, ].dot(Q[j, ])
+                    itemlist[j] = X[i, j]
                 partial_sort(itemlist.begin(), itemlist.begin()+10, itemlist.end())
                 # bn.partsort(itemlist, 10)
 
