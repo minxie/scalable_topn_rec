@@ -36,7 +36,7 @@ class SGDMachine(MFMachine):
         cdef int N = params.p_N
 
         # cdef np.ndarray[np.float64_t, ndim=1] itemlist
-        cdef vector[double] itemlist
+        cdef vector[double] itemlist(N)
 
         processing_order = range(len(data.ratings))
         for tr_iter in xrange(params.p_max_i):
@@ -74,7 +74,7 @@ class SGDMachine(MFMachine):
             # itemlist = np.empty(N, dtype=np.float64)
             for i in xrange(M):
                 for j in xrange(N):
-                    itemlist.push_back(P[i, ].dot(Q[j, ]))
+                    itemlist[j] = P[i, ].dot(Q[j, ])
                 # bn.partsort(itemlist, 10)
 
             print "Top-N Time: " + str(time.clock() - start)
