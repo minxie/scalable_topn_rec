@@ -36,7 +36,8 @@ class SGDMachine(MFMachine):
         cdef int N = params.p_N
 
         # cdef np.ndarray[np.float64_t, ndim=1] itemlist
-        cdef vector[double] itemlist(N)
+        cdef vector[double] itemlist
+        itemlist.resize(N)
 
         processing_order = range(len(data.ratings))
         for tr_iter in xrange(params.p_max_i):
