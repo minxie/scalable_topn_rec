@@ -85,6 +85,6 @@ class SGDMachine(MFMachine):
                     # itemlist[j] = P[i, ].dot(Q[j, ])
                     # itemlist[j] = X[i, j]
                 # partial_sort(itemlist.begin(), itemlist.begin()+10, itemlist.end())
-                bn.partsort(itemlist[i, ], 10)
+                bn.partsort(X[i, ], 10)
 
             print "Top-N Time: " + str(time.clock() - start)
