@@ -40,7 +40,7 @@ if __name__ == "__main__":
             else:
                 item_id = dict_n[fields[3]]
             NNZ += 1
-            rating_list.append(user_id, item_id, fields[7]])
+            rating_list.append(user_id, item_id, fields[7])
             # oid.write(data_file + '\n')
             # oid.write(str(user_id) + ' ' + fields[3] + ' ' + fields[7] + '\n')
 
