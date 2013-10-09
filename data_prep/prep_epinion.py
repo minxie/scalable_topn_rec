@@ -21,7 +21,7 @@ if __name__ == "__main__":
         fid = open(data_file, 'r')
         itemid = -1
 
-        if file_number > 1000:
+        if file_number > 100:
             break
         else:
             file_number += 1
@@ -31,6 +31,8 @@ if __name__ == "__main__":
             if line == "":
                 continue
             fields = line.split('\t')
+            if fields[7] == "na":
+                continue
 
             if valid_user_flag == 1:
                 user_id += 1
@@ -41,6 +43,7 @@ if __name__ == "__main__":
             #    dict_m[fields[0]] = M
             # NNZ += 1
             # rating_list.append([dict_m[fields[0]], itemid, fields[1]])
+            oid.write(data_file + '\n')
             oid.write(str(user_id) + ' ' + fields[3] + ' ' + fields[7] + '\n')
 
         # oid.write('%%MatrixMarket matrix coordinate real general\n')
