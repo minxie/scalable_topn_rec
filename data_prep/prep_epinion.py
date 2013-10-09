@@ -12,10 +12,10 @@ if __name__ == "__main__":
 
     M = 0
     NNZ = 0
-    dict_m = {}
+    dict_n = {}
     rating_list = []
 
-    user = 1
+    user_id = 0
     for data_file in data_files:
         fid = open(data_file, 'r')
         itemid = -1
@@ -24,18 +24,23 @@ if __name__ == "__main__":
             break
         else:
             file_number += 1
-        
-        first_line_flag = 1
+
+        valid_user_flag = 1
         for line in fid:
             if line == "":
                 continue
             fields = line.split('\t')
+
+            if valid_user_flag == 1:
+                user_id += 1
+                valid_user_flag = 0
+
             # if not fields[0] in dict_m:
             #    M += 1
             #    dict_m[fields[0]] = M
             # NNZ += 1
             # rating_list.append([dict_m[fields[0]], itemid, fields[1]])
-            oid.write(fields[3] + ' ' + fields[7] + '\n')
+            oid.write(str(user_id) + ' ' + fields[3] + ' ' + fields[7] + '\n')
 
         # oid.write('%%MatrixMarket matrix coordinate real general\n')
         # oid.write(str(M) + ' ' + str(len(data_files)) + ' ' + str(NNZ) + '\n')
