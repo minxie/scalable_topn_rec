@@ -16,6 +16,7 @@ if __name__ == "__main__":
     rating_list = []
 
     user_id = 0
+    file_number = 0
     for data_file in data_files:
         fid = open(data_file, 'r')
         itemid = -1
