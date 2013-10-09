@@ -15,7 +15,7 @@ if __name__ == "__main__":
     dict_m = {}
     rating_list = []
 
-    file_number = 1
+    user = 1
     for data_file in data_files:
         fid = open(data_file, 'r')
         itemid = -1
