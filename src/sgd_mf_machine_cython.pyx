@@ -31,6 +31,7 @@ class SGDMachine(MFMachine):
         cdef double sgd_lambda = params.p_lambda
 
         cdef double rmse_err = -1.0
+        cdef double last_rmse_err = 1e6
         cdef int user = -1
         cdef int item = -1
         cdef double obsv = -1.0
@@ -45,10 +46,12 @@ class SGDMachine(MFMachine):
         cdef vector[double] itemlist
         itemlist.resize(N)
 
+        oid = open(params.p_res_log_f_loc, 'a')
+        oid.write(params.p_D)
+        
         processing_order = range(len(data.ratings))
+        start = time.clock()
         for tr_iter in xrange(params.p_max_i):
-            start = time.clock()
-            
             # Shuffling order of processing the tuples
             random.shuffle(processing_order)
 
@@ -71,20 +74,32 @@ class SGDMachine(MFMachine):
             # Update parameters
             sgd_gamma *= params.p_step_dec
 
-            # Possible convergence check
-            print "Iteration Time: " + str(time.clock() - start)
-            print math.sqrt(rmse_err / len(data.ratings))
+            print str(tr_iter) + " " + str(math.sqrt(rmse_err / len(data.ratings)))
+            
+            # convergence check
+            if math.fabs(rmse_err - last_rmse_err) <= 1e-4:
+                break
+            last_rmse_err = rmse_err
 
-            # Getting top-N recommendation for every user
-            start = time.clock()
+        end = time.clock()
+        print "Training Time: " + str(end - start)
+        oid.write(' ' + str(end - start))
 
-            # itemlist = np.empty(N, dtype=np.float64)
-            X = P.dot(Q.T)
-            for i in xrange(M):
-                for j in xrange(N):
-                    # itemlist[j] = P[i, ].dot(Q[j, ])
-                    itemlist[j] = X[i, j]
-                partial_sort(itemlist.begin(), itemlist.begin()+10, itemlist.end())
+        # Getting top-N recommendation for every user
+        start = time.clock()
+
+        # itemlist = np.empty(N, dtype=np.float64)
+        X = P.dot(Q.T)
+        for i in xrange(M):
+            for j in xrange(N):
+                # itemlist[j] = P[i, ].dot(Q[j, ])
+                itemlist[j] = X[i, j]
+            partial_sort(itemlist.begin(), itemlist.begin()+10, itemlist.end())
                 # bn.partsort(X[i, ], 10)
 
-            print "Top-N Time: " + str(time.clock() - start)
+        end = time.clock()
+        print "Top-N Time: " + str(end - start)
+        oid.write(' ' + str(end - start) + '\n')
+
+        oid.close()
+        

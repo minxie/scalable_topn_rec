@@ -38,6 +38,8 @@ class Params:
                             help='Training file location.')
         parser.add_argument('-te', nargs='?', dest='te', default="", type=str,
                             help='Testing file location.')
+        parser.add_argument('-rl', nargs='?', dest='rl', default="", type=str,
+                            help='Result log file location.')
         args = parser.parse_args()
 
         self.p_D = args.d
@@ -49,6 +51,7 @@ class Params:
         self.p_step_dec = args.sd
         self.p_train_f_loc = args.tr
         self.p_test_f_loc = args.te
+        self.p_res_log_f_loc = args.rl
 
     def print_params(self):
         print "Dimensionality of the latent space: " + str(self.p_D)
@@ -60,3 +63,4 @@ class Params:
         print "Step dec: " + str(self.p_step_dec)
         print "Training file location: " + str(self.p_train_f_loc)
         print "Testing file location: " + str(self.p_test_f_loc)
+        print "Result log file location: " + str(self.p_res_log_f_loc)
