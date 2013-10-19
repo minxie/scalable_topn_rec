@@ -30,7 +30,7 @@ class Params:
                             help='Lambda for the regularizer.')
         parser.add_argument('-g', nargs='?', dest='g', default=1e-3, type=float,
                             help='Gamma for the gradient descent.')
-        parser.add_argument('-i', nargs='?', dest='i', default=1, type=int,
+        parser.add_argument('-i', nargs='?', dest='i', default=50, type=int,
                             help='Max # of iterations.')
         parser.add_argument('-sd', nargs='?', dest='sd', default=0.9, type=float,
                             help='SGD step decrement.')
