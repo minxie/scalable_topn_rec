@@ -74,7 +74,8 @@ class SGDMachine(MFMachine):
             # Update parameters
             sgd_gamma *= params.p_step_dec
 
-            print str(tr_iter) + " " + str(math.sqrt(rmse_err / len(data.ratings)))
+            rmse_err = math.sqrt(rmse_err / len(data.ratings))
+            print str(tr_iter) + " " + str(rmse_err)
             
             # convergence check
             if math.fabs(rmse_err - last_rmse_err) <= 1e-3:
