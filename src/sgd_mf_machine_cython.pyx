@@ -47,7 +47,7 @@ class SGDMachine(MFMachine):
         itemlist.resize(N)
 
         oid = open(params.p_res_log_f_loc, 'a')
-        oid.write(params.p_D)
+        oid.write(str(params.p_D))
         
         processing_order = range(len(data.ratings))
         start = time.clock()
