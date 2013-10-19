@@ -40,7 +40,7 @@ class SGDMachine(MFMachine):
         cdef int M = params.p_M
         cdef int N = params.p_N
 
-        cdef np.ndarray[np.float64_t, ndim=2] X
+        cdef np.ndarray[np.float64_t, ndim=1] X
 
         # cdef np.ndarray[np.float64_t, ndim=1] itemlist
         cdef vector[double] itemlist
@@ -77,7 +77,7 @@ class SGDMachine(MFMachine):
             print str(tr_iter) + " " + str(math.sqrt(rmse_err / len(data.ratings)))
             
             # convergence check
-            if math.fabs(rmse_err - last_rmse_err) <= 1e-4:
+            if math.fabs(rmse_err - last_rmse_err) <= 1e-3:
                 break
             last_rmse_err = rmse_err
 
@@ -89,11 +89,12 @@ class SGDMachine(MFMachine):
         start = time.clock()
 
         # itemlist = np.empty(N, dtype=np.float64)
-        X = P.dot(Q.T)
+        # X = P.dot(Q.T)
         for i in xrange(M):
+            X = P[i, ].dot(Q.T)
             for j in xrange(N):
                 # itemlist[j] = P[i, ].dot(Q[j, ])
-                itemlist[j] = X[i, j]
+                itemlist[j] = X[j]
             partial_sort(itemlist.begin(), itemlist.begin()+10, itemlist.end())
                 # bn.partsort(X[i, ], 10)
 
