@@ -34,6 +34,8 @@ class Params:
                             help='Max # of iterations.')
         parser.add_argument('-sd', nargs='?', dest='sd', default=0.9, type=float,
                             help='SGD step decrement.')
+        parser.add_argument('-ct', nargs='?', dest='ct', default=1e-3, type=float,
+                            help='Convergence threshold.')
         parser.add_argument('-tr', nargs='?', dest='tr', default="", type=str,
                             help='Training file location.')
         parser.add_argument('-te', nargs='?', dest='te', default="", type=str,
@@ -49,6 +51,7 @@ class Params:
         self.p_gamma = args.g
         self.p_max_i = args.i
         self.p_step_dec = args.sd
+        self.p_conv_thres = args.ct
         self.p_train_f_loc = args.tr
         self.p_test_f_loc = args.te
         self.p_res_log_f_loc = args.rl
@@ -61,6 +64,7 @@ class Params:
         print "Gamma for the gradient descent: " + str(self.p_gamma)
         print "Maximum iterations: " + str(self.p_max_i)
         print "Step dec: " + str(self.p_step_dec)
+        print "Converge threshold: " + str(self.p_conv_thres)
         print "Training file location: " + str(self.p_train_f_loc)
         print "Testing file location: " + str(self.p_test_f_loc)
         print "Result log file location: " + str(self.p_res_log_f_loc)

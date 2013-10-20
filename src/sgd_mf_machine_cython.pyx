@@ -78,7 +78,7 @@ class SGDMachine(MFMachine):
             print str(tr_iter) + " " + str(rmse_err)
             
             # convergence check
-            if math.fabs(rmse_err - last_rmse_err) <= 1e-3:
+            if math.fabs(rmse_err - last_rmse_err) <= params.p_conv_thres:
                 break
             last_rmse_err = rmse_err
 
