@@ -22,7 +22,7 @@ def run():
     
     model = LatentModel(params)
     P = np.random.random_sample((params.p_M, params.p_D))
-    Q = np.random.random_sample((params.p_M, params.p_D))
+    Q = np.random.random_sample((params.p_N, params.p_D))
     
     # Handling I/O things
     data = MMDataFile()
