@@ -1,0 +1,35 @@
+   9.49879) Iteration:   0 Training RMSE:   3.79616 rmse difference:    3.79616
+   12.3241) Iteration:   1 Training RMSE:   2.04507 rmse difference:    -1.7511
+   15.5327) Iteration:   2 Training RMSE:   1.75946 rmse difference:   -0.28561
+   18.6162) Iteration:   3 Training RMSE:   1.62208 rmse difference:  -0.137375
+   21.6561) Iteration:   4 Training RMSE:   1.53898 rmse difference: -0.0831029
+   25.0111) Iteration:   5 Training RMSE:    1.4825 rmse difference: -0.0564785
+   28.1367) Iteration:   6 Training RMSE:   1.44132 rmse difference:   -0.04118
+   31.5612) Iteration:   7 Training RMSE:   1.40987 rmse difference: -0.0314523
+   34.7758) Iteration:   8 Training RMSE:   1.38505 rmse difference: -0.0248192
+    36.671) Iteration:   9 Training RMSE:   1.36499 rmse difference: -0.0200615
+   39.5616) Iteration:  10 Training RMSE:   1.34848 rmse difference: -0.0165113
+   42.3493) Iteration:  11 Training RMSE:   1.33469 rmse difference: -0.0137841
+   45.2687) Iteration:  12 Training RMSE:   1.32305 rmse difference: -0.0116377
+    48.315) Iteration:  13 Training RMSE:   1.31314 rmse difference: -0.00991616
+   51.3475) Iteration:  14 Training RMSE:   1.30462 rmse difference: -0.00851303
+    54.149) Iteration:  15 Training RMSE:   1.29727 rmse difference: -0.00735424
+   57.1155) Iteration:  16 Training RMSE:   1.29088 rmse difference: -0.00638692
+   60.1614) Iteration:  17 Training RMSE:   1.28531 rmse difference: -0.00557144
+   62.8395) Iteration:  18 Training RMSE:   1.28043 rmse difference: -0.00487884
+   65.4346) Iteration:  19 Training RMSE:   1.27615 rmse difference: -0.00428622
+   68.2761) Iteration:  20 Training RMSE:   1.27237 rmse difference: -0.0037769
+   70.5375) Iteration:  21 Training RMSE:   1.26903 rmse difference: -0.00333547
+   72.4621) Iteration:  22 Training RMSE:   1.26608 rmse difference: -0.00295256
+   75.2564) Iteration:  23 Training RMSE:   1.26346 rmse difference: -0.00261813
+   77.4331) Iteration:  24 Training RMSE:   1.26114 rmse difference: -0.00232573
+   79.7291) Iteration:  25 Training RMSE:   1.25907 rmse difference: -0.00206875
+   83.0544) Iteration:  26 Training RMSE:   1.25723 rmse difference: -0.00184281
+   86.2883) Iteration:  27 Training RMSE:   1.25558 rmse difference: -0.00164294
+   89.4013) Iteration:  28 Training RMSE:   1.25412 rmse difference: -0.00146664
+   92.6461) Iteration:  29 Training RMSE:   1.25281 rmse difference: -0.00131013
+   95.9327) Iteration:  30 Training RMSE:   1.25164 rmse difference: -0.00117132
+   98.8891) Iteration:  31 Training RMSE:   1.25059 rmse difference:  -0.001048
+   101.526) Iteration:  32 Training RMSE:   1.24965 rmse difference: -0.000938273
+Trn Time:    1.00942
+Tst Time:    2191.41
