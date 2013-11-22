@@ -1,51 +1,5 @@
-   1.29605) Iteration:   0 Training RMSE:   7.95272 rmse difference:    7.95272
-   1.54666) Iteration:   1 Training RMSE:   6.99968 rmse difference:  -0.953037
-   1.76926) Iteration:   2 Training RMSE:   6.44925 rmse difference:  -0.550433
-   2.01789) Iteration:   3 Training RMSE:   6.07537 rmse difference:  -0.373882
-   2.24165) Iteration:   4 Training RMSE:   5.80109 rmse difference:  -0.274279
-   2.46213) Iteration:   5 Training RMSE:   5.59018 rmse difference:  -0.210914
-   2.70496) Iteration:   6 Training RMSE:   5.42274 rmse difference:  -0.167433
-    2.9574) Iteration:   7 Training RMSE:   5.28674 rmse difference:     -0.136
-   3.16676) Iteration:   8 Training RMSE:   5.17435 rmse difference:  -0.112391
-   3.39664) Iteration:   9 Training RMSE:   5.08022 rmse difference: -0.0941354
-   3.63261) Iteration:  10 Training RMSE:   5.00053 rmse difference: -0.0796899
-   3.88088) Iteration:  11 Training RMSE:   4.93248 rmse difference: -0.0680457
-   4.12863) Iteration:  12 Training RMSE:   4.87396 rmse difference:  -0.058519
-   4.39961) Iteration:  13 Training RMSE:   4.82334 rmse difference: -0.0506251
-   4.66653) Iteration:  14 Training RMSE:   4.77932 rmse difference: -0.0440163
-   4.87607) Iteration:  15 Training RMSE:   4.74089 rmse difference: -0.0384337
-   5.06103) Iteration:  16 Training RMSE:   4.70721 rmse difference: -0.0336816
-   5.32324) Iteration:  17 Training RMSE:    4.6776 rmse difference: -0.0296091
-   5.54272) Iteration:  18 Training RMSE:    4.6515 rmse difference:    -0.0261
-   5.82118) Iteration:  19 Training RMSE:   4.62843 rmse difference: -0.0230622
-   6.05099) Iteration:  20 Training RMSE:   4.60801 rmse difference: -0.0204191
-   6.32103) Iteration:  21 Training RMSE:    4.5899 rmse difference: -0.0181124
-   6.54459) Iteration:  22 Training RMSE:   4.57381 rmse difference: -0.0160921
-   6.80101) Iteration:  23 Training RMSE:   4.55949 rmse difference:  -0.014317
-   7.03642) Iteration:  24 Training RMSE:   4.54674 rmse difference: -0.0127534
-   7.24551) Iteration:  25 Training RMSE:   4.53537 rmse difference: -0.0113731
-   7.47835) Iteration:  26 Training RMSE:   4.52521 rmse difference: -0.0101521
-   7.68416) Iteration:  27 Training RMSE:   4.51614 rmse difference: -0.00906996
-   7.91167) Iteration:  28 Training RMSE:   4.50804 rmse difference: -0.00810959
-   8.15075) Iteration:  29 Training RMSE:   4.50078 rmse difference: -0.00725588
-   8.40447) Iteration:  30 Training RMSE:   4.49428 rmse difference: -0.00649594
-   8.65733) Iteration:  31 Training RMSE:   4.48846 rmse difference: -0.00581873
-   8.91193) Iteration:  32 Training RMSE:   4.48325 rmse difference: -0.00521467
-    9.1461) Iteration:  33 Training RMSE:   4.47857 rmse difference: -0.00467542
-   9.38764) Iteration:  34 Training RMSE:   4.47438 rmse difference: -0.00419349
-   9.63263) Iteration:  35 Training RMSE:   4.47062 rmse difference: -0.00376257
-   9.87852) Iteration:  36 Training RMSE:   4.46724 rmse difference: -0.00337704
-    10.115) Iteration:  37 Training RMSE:   4.46421 rmse difference: -0.00303185
-   10.3725) Iteration:  38 Training RMSE:   4.46149 rmse difference: -0.0027226
-   10.6161) Iteration:  39 Training RMSE:   4.45904 rmse difference: -0.00244549
-   10.8418) Iteration:  40 Training RMSE:   4.45684 rmse difference: -0.00219697
-   11.0449) Iteration:  41 Training RMSE:   4.45487 rmse difference: -0.0019741
-   11.2972) Iteration:  42 Training RMSE:    4.4531 rmse difference: -0.00177411
-   11.5296) Iteration:  43 Training RMSE:    4.4515 rmse difference: -0.0015946
-   11.7805) Iteration:  44 Training RMSE:   4.45007 rmse difference: -0.00143346
-   12.0286) Iteration:  45 Training RMSE:   4.44878 rmse difference: -0.00128876
-   12.2824) Iteration:  46 Training RMSE:   4.44762 rmse difference: -0.00115879
-   12.4976) Iteration:  47 Training RMSE:   4.44658 rmse difference: -0.00104203
-   12.7528) Iteration:  48 Training RMSE:   4.44564 rmse difference: -0.000937091
-Trn Time:   0.121851
-Tst Time:    20059.7
+10 1.59782 42.1947
+20 1.89394 44.9422
+30 3.28948 107.994
+40 7.20399 89.2945
+50 4.72421 63.2702
