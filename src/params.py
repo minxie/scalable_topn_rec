@@ -18,6 +18,12 @@ class Params:
         self.p_train_f_loc = "" # training file location
         self.p_test_f_loc = "" # testing file location
 
+        self.p_a = -1.0 # initial percentage
+        self.p_b = -1.0 # delta percentage
+        self.p_c = 0 # # of deltas
+
+        self.p_TopN = 0
+
     def parse_args(self, title):
         parser = argparse.ArgumentParser(description=title)
         parser.add_argument('-d', nargs='?', dest='d', default=-1, type=int,
@@ -42,6 +48,14 @@ class Params:
                             help='Testing file location.')
         parser.add_argument('-rl', nargs='?', dest='rl', default="", type=str,
                             help='Result log file location.')
+        parser.add_argument('-a', nargs='?', dest='a', default=0.5, type=float,
+                            help='Initial percentage.')
+        parser.add_argument('-b', nargs='?', dest='b', default=0.01, type=float,
+                            help='Delta percentage.')
+        parser.add_argument('-c', nargs='?', dest='c', default=5, type=int,
+                            help='# of deltas.')
+        parser.add_argument('-N', nargs='?', dest='N', default=10, type=int,
+                            help='# of items required.')
         args = parser.parse_args()
 
         self.p_D = args.d
@@ -55,6 +69,10 @@ class Params:
         self.p_train_f_loc = args.tr
         self.p_test_f_loc = args.te
         self.p_res_log_f_loc = args.rl
+        self.p_a = args.a
+        self.p_b = args.b
+        self.p_c = args.c
+        self.p_TopN = args.N
 
     def print_params(self):
         print "Dimensionality of the latent space: " + str(self.p_D)

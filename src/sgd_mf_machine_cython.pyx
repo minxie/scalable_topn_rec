@@ -40,6 +40,12 @@ class SGDMachine(MFMachine):
         cdef int M = params.p_M
         cdef int N = params.p_N
 
+        cdef int a = params.p_a
+        cdef int b = params.p_b
+        cdef int c = params.p_c
+
+        cdef int topn = params.p_TopN
+
         cdef np.ndarray[np.float64_t, ndim=1] X
 
         # cdef np.ndarray[np.float64_t, ndim=1] itemlist
@@ -49,59 +55,64 @@ class SGDMachine(MFMachine):
         oid = open(params.p_res_log_f_loc, 'a')
         oid.write(str(params.p_D))
         
-        processing_order = range(len(data.ratings))
-        start = time.clock()
-        for tr_iter in xrange(params.p_max_i):
-            # Shuffling order of processing the tuples
-            random.shuffle(processing_order)
+        for update_iter in xrange(c + 1):
 
-            # Run through all training examples
-            rmse_err = 0.0
-            for idx in processing_order:
-                user = data.ratings[idx][0]
-                item = data.ratings[idx][1]
-                obsv = data.ratings[idx][2]
-                err = 0.0
+            processing_order = range(len(data.ratings) * (a + b * c))
 
-                err = obsv - model.predict(user, item, P, Q)
-                rmse_err += err * err
-                for i in xrange(D):
-                    P[user, i] += sgd_gamma * (err * Q[item, i]
-                                               - sgd_lambda * P[user, i])
-                    Q[item, i] += sgd_gamma * (err * P[user, i]
-                                               - sgd_lambda * Q[item, i])
+            # Training Phase
+            start = time.clock()
+            for tr_iter in xrange(params.p_max_i):
+                # Shuffling order of processing the tuples
+                random.shuffle(processing_order)
 
-            # Update parameters
-            sgd_gamma *= params.p_step_dec
+                # Run through all training examples
+                rmse_err = 0.0
+                for idx in processing_order:
+                    user = data.ratings[idx][0]
+                    item = data.ratings[idx][1]
+                    obsv = data.ratings[idx][2]
+                    err = 0.0
 
-            rmse_err = math.sqrt(rmse_err / len(data.ratings))
-            print str(tr_iter) + " " + str(rmse_err)
+                    err = obsv - model.predict(user, item, P, Q)
+                    rmse_err += err * err
+                    for i in xrange(D):
+                        P[user, i] += sgd_gamma * (err * Q[item, i]
+                                                   - sgd_lambda * P[user, i])
+                        Q[item, i] += sgd_gamma * (err * P[user, i]
+                                                   - sgd_lambda * Q[item, i])
+
+                # Update parameters
+                sgd_gamma *= params.p_step_dec
+
+                rmse_err = math.sqrt(rmse_err / len(data.ratings))
+                print str(tr_iter) + " " + str(rmse_err)
             
-            # convergence check
-            if math.fabs(rmse_err - last_rmse_err) <= params.p_conv_thres:
-                break
-            last_rmse_err = rmse_err
+                # convergence check
+                if math.fabs(rmse_err - last_rmse_err) <= params.p_conv_thres:
+                    break
+                last_rmse_err = rmse_err
 
-        end = time.clock()
-        print "Training Time: " + str(end - start)
-        oid.write(' ' + str(end - start))
+            end = time.clock()
+            print "Training Time: " + str(end - start)
+            oid.write(' ' + str(end - start))
 
-        # Getting top-N recommendation for every user
-        start = time.clock()
+            # Getting top-N recommendation for every user
+            start = time.clock()
 
-        # itemlist = np.empty(N, dtype=np.float64)
-        # X = P.dot(Q.T)
-        for i in xrange(M):
-            X = P[i, ].dot(Q.T)
-            for j in xrange(N):
-                # itemlist[j] = P[i, ].dot(Q[j, ])
-                itemlist[j] = X[j]
-            partial_sort(itemlist.begin(), itemlist.begin()+10, itemlist.end())
-                # bn.partsort(X[i, ], 10)
+            # itemlist = np.empty(N, dtype=np.float64)
+            # X = P.dot(Q.T)
+            for i in xrange(M):
+                X = P[i, ].dot(Q.T)
+                for j in xrange(N):
+                    # itemlist[j] = P[i, ].dot(Q[j, ])
+                    itemlist[j] = X[j]
+                    partial_sort(itemlist.begin(), itemlist.begin()+topn, itemlist.end())
+                    # bn.partsort(X[i, ], 10)
 
-        end = time.clock()
-        print "Top-N Time: " + str(end - start)
-        oid.write(' ' + str(end - start) + '\n')
+            end = time.clock()
+            print "Top-N Time: " + str(end - start)
+            oid.write(' ' + str(end - start))
 
+        oid.write('\n')
         oid.close()
         
