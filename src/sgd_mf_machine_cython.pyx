@@ -56,7 +56,7 @@ class SGDMachine(MFMachine):
         oid.write(str(params.p_D))
         
         for update_iter in xrange(c + 1):
-
+            print "Iteration: " + str(update_iter)
             processing_order = range(len(data.ratings) * (a + b * c))
 
             # Training Phase
