@@ -40,8 +40,8 @@ class SGDMachine(MFMachine):
         cdef int M = params.p_M
         cdef int N = params.p_N
 
-        cdef int a = params.p_a
-        cdef int b = params.p_b
+        cdef double a = params.p_a
+        cdef double b = params.p_b
         cdef int c = params.p_c
 
         cdef int topn = params.p_TopN
