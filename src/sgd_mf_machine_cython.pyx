@@ -58,7 +58,7 @@ class SGDMachine(MFMachine):
         for update_iter in xrange(c + 1):
             print "Iteration: " + str(update_iter)
             print str(len(data.ratings)) + " " + str(len(data.ratings) * (a + b * c))
-            processing_order = range(len(data.ratings) * (a + b * c))
+            processing_order = range(int(len(data.ratings) * (a + b * c)))
 
             # Training Phase
             start = time.clock()
