@@ -86,3 +86,8 @@ class Params:
         print "Training file location: " + str(self.p_train_f_loc)
         print "Testing file location: " + str(self.p_test_f_loc)
         print "Result log file location: " + str(self.p_res_log_f_loc)
+        print "Inital percentage: " + str(self.p_a)
+        print "Delta percentage: " + str(self.p_b)
+        print "Num. of deltas: " + str(self.p_c)
+        print "Top-N: " + str(self.p_TopN)
+        
