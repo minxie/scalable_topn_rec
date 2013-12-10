@@ -172,6 +172,9 @@ class SGDMachine(MFMachine):
                     if (update_iter != 0) and (user_buf_map[i] != -1):
                         map_id = user_buf_map[i]
                         my_p_ref_pt = t_buf.p_ref_pt[map_id]
+                        print my_p_ref_pt
+                        print P[i]
+                        
                         if (my_p_ref_pt - theta <= P[i]) and (P[i] <= my_p_ref_pt + theta):
                             my_buf = t_buf.p_Buffer[map_id]
                             my_UpperB = t_buf.p_UpperB[map_id]
