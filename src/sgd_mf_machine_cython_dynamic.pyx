@@ -162,7 +162,7 @@ class SGDMachine(MFMachine):
                 X = P[i, ].dot(Q.T)
                 for j in xrange(N):
                     itemlist[j] = X[j]
-                partial_sort(itemlist.begin(), itemlist.begin()+100, itemlist.end())
+                partial_sort(itemlist.begin(), itemlist.begin()+20, itemlist.end())
                 end = time.clock()
                 sum_time_sort += end - start
                 
@@ -282,7 +282,13 @@ class SGDMachine(MFMachine):
 
                             if total_num >= topn:
                                 sum_delta += c_iter - topn
+                                print str(c_iter - topn)
                                 break
+                            elif c_iter == 19:
+                                start = time.clock()
+                                partial_sort(itemlist.begin(), itemlist.begin()+100, itemlist.end())
+                                end = time.clock()
+                                sum_time_sort += end - start
                             elif c_iter == 99:
                                 start = time.clock()
                                 partial_sort(itemlist.begin(), itemlist.begin()+500, itemlist.end())
