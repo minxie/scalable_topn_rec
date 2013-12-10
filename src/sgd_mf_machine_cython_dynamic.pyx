@@ -156,7 +156,7 @@ class SGDMachine(MFMachine):
             sum_time_mtre = 0
             
             for i in xrange(M):
-                print i
+                # print i
                 
                 start = time.clock()
                 X = P[i, ].dot(Q.T)
@@ -279,7 +279,7 @@ class SGDMachine(MFMachine):
 
                             if total_num >= topn:
                                 sum_delta += c_iter - topn
-                                print str(c_iter - topn)
+                                # print str(c_iter - topn)
                                 success_Flag = True
                                 break
                                 
