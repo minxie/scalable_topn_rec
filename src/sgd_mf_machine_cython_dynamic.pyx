@@ -51,7 +51,7 @@ class SGDMachine(MFMachine):
         cdef double theta = params.p_theta
 
         cdef np.ndarray[np.float64_t, ndim=1] X
-        cdef np.ndarray[np.float64_t, ndim=1] Y
+        cdef np.ndarray[np.long, ndim=1] Y
 
         cdef np.ndarray[np.float64_t, ndim=1] max_val
         cdef np.ndarray[np.float64_t, ndim=1] min_val
