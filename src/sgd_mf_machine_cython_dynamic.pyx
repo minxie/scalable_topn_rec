@@ -244,7 +244,7 @@ class SGDMachine(MFMachine):
                         for c_iter in xrange(topn,20):
 
                             if c_iter == topn:
-                                if (np.abs(Q[itemlist[topn]] - Q[itemlist[topn-1]] <= 0.01)).all():
+                                if (np.abs(Q[itemlist[topn]] - Q[itemlist[topn-1]] <= 0.001)).all():
                                     break
                             
                             start = time.clock()
