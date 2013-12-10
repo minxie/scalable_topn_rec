@@ -6,7 +6,8 @@ import numpy
 
 setup(
     cmdclass = {'build_ext': build_ext}, include_dirs = [numpy.get_include()],
-    ext_modules=[Extension("latent_model_cython", ["latent_model_cython.pyx"]),
+    ext_modules=[Extension("topn_buffer", ["topn_buffer.pyx"]),
+                 Extension("latent_model_cython", ["latent_model_cython.pyx"]),
                  Extension("sgd_mf_machine_cython", ["sgd_mf_machine_cython.pyx"], language="c++"),
                  Extension("sgd_mf_machine_cython_dynamic", ["sgd_mf_machine_cython_dynamic.pyx"], language="c++"),
                  Extension("sgd_mf_machine_cython_static_kd", ["sgd_mf_machine_cython_static_kd.pyx"], language="c++"),

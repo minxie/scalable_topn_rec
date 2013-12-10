@@ -56,6 +56,8 @@ class Params:
                             help='# of deltas.')
         parser.add_argument('-N', nargs='?', dest='N', default=10, type=int,
                             help='# of items required.')
+        parser.add_argument('-t', nargs='?', dest='t', default=0.01, type=float,
+                            help='Delta percentage.')
         args = parser.parse_args()
 
         self.p_D = args.d
@@ -73,6 +75,7 @@ class Params:
         self.p_b = args.b
         self.p_c = args.c
         self.p_TopN = args.N
+        self.p_theta = args.t
 
     def print_params(self):
         print "Dimensionality of the latent space: " + str(self.p_D)
@@ -90,4 +93,5 @@ class Params:
         print "Delta percentage: " + str(self.p_b)
         print "Num. of deltas: " + str(self.p_c)
         print "Top-N: " + str(self.p_TopN)
+        print "Theta: " + str(self.p_theta)
         
