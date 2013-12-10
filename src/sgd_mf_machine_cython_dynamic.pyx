@@ -51,6 +51,7 @@ class SGDMachine(MFMachine):
         cdef double theta = params.p_theta
 
         cdef np.ndarray[np.float64_t, ndim=1] X
+        cdef np.ndarray[np.float64_t, ndim=1] Y
 
         cdef np.ndarray[np.float64_t, ndim=1] max_val
         cdef np.ndarray[np.float64_t, ndim=1] min_val
@@ -184,9 +185,10 @@ class SGDMachine(MFMachine):
                     if not reuse_flag:
                         start = time.clock()
                         X = P[i, ].dot(Q.T)
-                        for j in xrange(N):
-                            itemlist[j] = X[j]
-                        partial_sort(itemlist.begin(), itemlist.begin()+20, itemlist.end())
+                        #for j in xrange(N):
+                        #    itemlist[j] = X[j]
+                        Y = (-X).argsort()[:20]
+                        # partial_sort(itemlist.begin(), itemlist.begin()+20, itemlist.end())
                         end = time.clock()
                         sum_time_sort += end - start
                         
@@ -222,8 +224,8 @@ class SGDMachine(MFMachine):
 
                         for c_iter in xrange(topn):
                             start = time.clock()
-                            t_buf.p_Buffer[user_buf_map[i]].append(itemlist[c_iter])
-                            LowerB = LowerBound(i, theta, itemlist[c_iter], D, P, Q)
+                            t_buf.p_Buffer[user_buf_map[i]].append(Y[c_iter])
+                            LowerB = LowerBound(i, theta, Y[c_iter], D, P, Q)
                             l_LowerB.append(LowerB)
                             end = time.clock()
                             sum_time_sort += end - start
@@ -244,16 +246,16 @@ class SGDMachine(MFMachine):
                         for c_iter in xrange(topn,20):
 
                             if c_iter == topn:
-                                if (np.abs(Q[itemlist[topn]] - Q[itemlist[topn-1]] <= 0.001)).all():
+                                if (np.abs(Q[Y[topn]] - Q[Y[topn-1]] <= 0.001)).all():
                                     break
                             
                             start = time.clock()
                             # Calculate Lowerbound Valeu for new item
-                            t_buf.p_Buffer[user_buf_map[i]].append(itemlist[c_iter])
-                            LowerB = LowerBound(i, theta, itemlist[c_iter], D, P, Q)
+                            t_buf.p_Buffer[user_buf_map[i]].append(Y[c_iter])
+                            LowerB = LowerBound(i, theta, Y[c_iter], D, P, Q)
                             l_LowerB.append(LowerB)
                             # Calculate Upperbound Value
-                            UpperB = UpperBound(t_buf, i, theta, itemlist[c_iter], itemlist[topn-1], D, P, Q, min_val, max_val, c_iter, topn, user_buf_map[i])
+                            UpperB = UpperBound(t_buf, i, theta, Y[c_iter], Y[topn-1], D, P, Q, min_val, max_val, c_iter, topn, user_buf_map[i])
                             end = time.clock()
                             sum_time_sort += end - start
                             sum_time_kdtr += end - start
@@ -283,26 +285,26 @@ class SGDMachine(MFMachine):
                                 success_flag = True
                                 break
                                 
-                            if c_iter == 19:
-                                start = time.clock()
-                                partial_sort(itemlist.begin(), itemlist.begin()+100, itemlist.end())
-                                end = time.clock()
-                                sum_time_sort += end - start
-                            elif c_iter == 99:
-                                start = time.clock()
-                                partial_sort(itemlist.begin(), itemlist.begin()+500, itemlist.end())
-                                end = time.clock()
-                                sum_time_sort += end - start
-                            elif c_iter == 499:
-                                start = time.clock()
-                                partial_sort(itemlist.begin(), itemlist.begin()+1000, itemlist.end())
-                                end = time.clock()                                
-                                sum_time_sort += end - start
-                            elif c_iter == 999:
-                                start = time.clock()
-                                partial_sort(itemlist.begin(), itemlist.begin()+10000, itemlist.end())
-                                end = time.clock()                                
-                                sum_time_sort += end - start
+                            # if c_iter == 19:
+                            #     start = time.clock()
+                            #     partial_sort(iteml.begin(), itemlist.begin()+100, itemlist.end())
+                            #     end = time.clock()
+                            #     sum_time_sort += end - start
+                            # elif c_iter == 99:
+                            #     start = time.clock()
+                            #     partial_sort(itemlist.begin(), itemlist.begin()+500, itemlist.end())
+                            #     end = time.clock()
+                            #     sum_time_sort += end - start
+                            # elif c_iter == 499:
+                            #     start = time.clock()
+                            #     partial_sort(itemlist.begin(), itemlist.begin()+1000, itemlist.end())
+                            #     end = time.clock()                                
+                            #     sum_time_sort += end - start
+                            # elif c_iter == 999:
+                            #     start = time.clock()
+                            #     partial_sort(itemlist.begin(), itemlist.begin()+10000, itemlist.end())
+                            #     end = time.clock()                                
+                            #     sum_time_sort += end - start
                         if success_flag:
                             total_n_buffers += 1
                             new_n_buffers += 1
