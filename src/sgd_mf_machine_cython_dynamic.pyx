@@ -280,7 +280,7 @@ class SGDMachine(MFMachine):
                             if total_num >= topn:
                                 sum_delta += c_iter - topn
                                 # print str(c_iter - topn)
-                                success_Flag = True
+                                success_flag = True
                                 break
                                 
                             if c_iter == 19:
