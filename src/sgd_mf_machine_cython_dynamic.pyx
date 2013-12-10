@@ -175,7 +175,7 @@ class SGDMachine(MFMachine):
                         print my_p_ref_pt
                         print P[i]
                         
-                        if (my_p_ref_pt - theta <= P[i]) and (P[i] <= my_p_ref_pt + theta):
+                        if (my_p_ref_pt - theta <= P[i]).all() and (P[i] <= my_p_ref_pt + theta).all():
                             my_buf = t_buf.p_Buffer[map_id]
                             my_UpperB = t_buf.p_UpperB[map_id]
                             for d in xrange(params.D):
