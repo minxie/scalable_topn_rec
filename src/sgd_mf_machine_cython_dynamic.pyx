@@ -208,7 +208,7 @@ class SGDMachine(MFMachine):
                     #                                          min_val_delta[d] * (my_p_ref_pt[d] - theta))
                     #                 total_num = 0
                     #                 for cand_item in my_buf:
-                    #                     if np.dot(cand_item.T, P[i]) >= my_UpperB:
+                    #                     if np.dot(Q[cand_item], P[i]) >= my_UpperB:
                     #                         total_num += 1
                     #                 if total_num >= topn:
                     #                     resuse_flag = True
