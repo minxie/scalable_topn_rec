@@ -242,6 +242,11 @@ class SGDMachine(MFMachine):
                             sum_time_mtre += end - start
                         success_flag = False
                         for c_iter in xrange(topn,20):
+
+                            if c_iter == topn:
+                                if (np.abs(Q[itemlist[topn]] - Q[itemlist[topn-1]] <= 0.01)).all():
+                                    break
+                            
                             start = time.clock()
                             # Calculate Lowerbound Valeu for new item
                             t_buf.p_Buffer[user_buf_map[i]].append(itemlist[c_iter])
