@@ -172,7 +172,7 @@ class SGDMachine(MFMachine):
                                                  min_val_delta[d] * (my_p_ref_pt[d] - theta))
                             total_num = 0
                             for cand_item in my_buf:
-                                if np.dot(cand_item.T, P[i]) >= my_UpperB:
+                                if np.dot(Q[cand_item], P[i]) >= my_UpperB:
                                     total_num += 1
                             if total_num >= topn:
                                 resuse_flag = True
@@ -194,16 +194,16 @@ class SGDMachine(MFMachine):
                     #     for cand_user in top1_user_map[itemlist[0]]:
                     #         cand_Creation_Iter = t_buf.p_Creation_Iter[user_buf_map[cand_user]]
                     #         if (update_iter == 0) or (cand_Creation_Iter == update_iter):
-                    #             if (P[cand_user] - theta <= P[i]) and (P[i] <= P[cand_user] + theta):
+                    #             if (P[cand_user] - theta <= P[i]).all() and (P[i] <= P[cand_user] + theta).all():
                     #                 reuse_flag = True
                     #                 user_buf_map[i] = user_buf_map[cand_user]
                     #             elif user_top1_map[cand_user] == itemlist[0]:
                     #                 map_id = user_buf_map[cand_user]
                     #                 my_p_ref_pt = t_buf.p_ref_pt[map_id]
-                    #                 if (my_p_ref_pt - theta <= P[i]) and (P[i] <= my_p_ref_pt + theta):
+                    #                 if (my_p_ref_pt - theta <= P[i]).all() and (P[i] <= my_p_ref_pt + theta).all():
                     #                     my_buf = t_buf.p_Buffer[map_id]
                     #                     my_UpperB = t_buf.p_UpperB[map_id]
-                    #                     for d in xrange(params.D):
+                    #                     for d in xrange(params.p_D):
                     #                         my_UpperB += max(max_val_delta[d] * (my_p_ref_pt[d] + theta),
                     #                                          min_val_delta[d] * (my_p_ref_pt[d] - theta))
                     #                 total_num = 0
