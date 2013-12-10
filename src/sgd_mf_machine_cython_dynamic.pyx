@@ -158,27 +158,16 @@ class SGDMachine(MFMachine):
             for i in xrange(M):
                 # print i
                 
-                start = time.clock()
-                X = P[i, ].dot(Q.T)
-                for j in xrange(N):
-                    itemlist[j] = X[j]
-                partial_sort(itemlist.begin(), itemlist.begin()+20, itemlist.end())
-                end = time.clock()
-                sum_time_sort += end - start
-                
                 if True:
                     start = time.clock()
                     reuse_flag = False
                     if (update_iter != 0) and (user_buf_map[i] != -1):
                         map_id = user_buf_map[i]
-                        my_p_ref_pt = t_buf.p_ref_pt[map_id]
-                        print my_p_ref_pt
-                        print P[i]
-                        
+                        my_p_ref_pt = t_buf.p_ref_pt[map_id]                        
                         if (my_p_ref_pt - theta <= P[i]).all() and (P[i] <= my_p_ref_pt + theta).all():
                             my_buf = t_buf.p_Buffer[map_id]
                             my_UpperB = t_buf.p_UpperB[map_id]
-                            for d in xrange(params.D):
+                            for d in xrange(params.p_D):
                                 my_UpperB += max(max_val_delta[d] * (my_p_ref_pt[d] + theta),
                                                  min_val_delta[d] * (my_p_ref_pt[d] - theta))
                             total_num = 0
@@ -187,6 +176,19 @@ class SGDMachine(MFMachine):
                                     total_num += 1
                             if total_num >= topn:
                                 resuse_flag = True
+                    end = time.clock()
+                    sum_time_sort += end - start
+                    sum_time_kdtr += end - start
+                    sum_time_mtre += end - start
+
+                    if not reuse_flag:
+                        start = time.clock()
+                        X = P[i, ].dot(Q.T)
+                        for j in xrange(N):
+                            itemlist[j] = X[j]
+                        partial_sort(itemlist.begin(), itemlist.begin()+20, itemlist.end())
+                        end = time.clock()
+                        sum_time_sort += end - start
                         
                     # if (not reuse_flag) and (itemlist[0] in top1_user_map):
                     #     for cand_user in top1_user_map[itemlist[0]]:
@@ -211,10 +213,6 @@ class SGDMachine(MFMachine):
                     #                 if total_num >= topn:
                     #                     resuse_flag = True
                     #                     user_buf_map[i] = map_id
-                    end = time.clock()
-                    sum_time_sort += end - start
-                    sum_time_kdtr += end - start
-                    sum_time_mtre += end - start
                     
                     if not reuse_flag: # Create new buffer
                         user_buf_map[i] = cur_buf
