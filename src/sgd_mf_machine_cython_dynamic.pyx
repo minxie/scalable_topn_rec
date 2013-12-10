@@ -60,10 +60,10 @@ class SGDMachine(MFMachine):
         cdef np.ndarray[np.float64_t, ndim=2] tmp_Q
         tmp_Q = np.random.random_sample((params.p_N, params.p_D))
 
-        max_val = np.random.random_sample((params.p_D, 1))
-        min_val = np.random.random_sample((params.p_D, 1))
-        max_val_delta = np.random.random_sample((params.p_D, 1))
-        min_val_delta = np.random.random_sample((params.p_D, 1))
+        max_val = np.random.random_sample((params.p_D))
+        min_val = np.random.random_sample((params.p_D))
+        max_val_delta = np.random.random_sample((params.p_D))
+        min_val_delta = np.random.random_sample((params.p_D))
         
         max_val.fill(-10000)
         min_val.fill(10000)
