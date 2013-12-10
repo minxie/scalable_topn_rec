@@ -219,12 +219,6 @@ class SGDMachine(MFMachine):
                         t_buf.p_Creation_Iter[user_buf_map[i]] = update_iter
                         l_LowerB = []
 
-                        if itemlist[0] in top1_user_map:
-                            top1_user_map[itemlist[0]].append(i)
-                        else:
-                            top1_user_map[itemlist[0]] = [i]
-                            user_top1_map[i] = itemlist[0]
-
                         for c_iter in xrange(topn):
                             start = time.clock()
                             t_buf.p_Buffer[user_buf_map[i]].append(itemlist[c_iter])
@@ -307,6 +301,12 @@ class SGDMachine(MFMachine):
                             total_n_buffers += 1
                             new_n_buffers += 1
                             cur_buf += 1
+
+                            if itemlist[0] in top1_user_map:
+                                top1_user_map[itemlist[0]].append(i)
+                            else:
+                                top1_user_map[itemlist[0]] = [i]
+                                user_top1_map[i] = itemlist[0]
                         else:
                             t_buf.p_Buffer[user_buf_map[i]] = []
 
