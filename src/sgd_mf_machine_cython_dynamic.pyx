@@ -169,7 +169,7 @@ class SGDMachine(MFMachine):
                 if True:
                     start = time.clock()
                     reuse_flag = False
-                    if update_iter != 0:
+                    if (update_iter != 0) and (user_buf_map[i] != -1):
                         map_id = user_buf_map[i]
                         my_p_ref_pt = t_buf.p_ref_pt[map_id]
                         if (my_p_ref_pt - theta <= P[i]) and (P[i] <= my_p_ref_pt + theta):
@@ -309,6 +309,7 @@ class SGDMachine(MFMachine):
                                 user_top1_map[i] = itemlist[0]
                         else:
                             t_buf.p_Buffer[user_buf_map[i]] = []
+                            user_buf_map[i] = -1
 
                     
 
