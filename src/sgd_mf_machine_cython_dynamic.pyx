@@ -183,7 +183,7 @@ class SGDMachine(MFMachine):
                             if total_num >= topn:
                                 resuse_flag = True
                         
-                    if not reuse_flag:
+                    if (not reuse_flag) and (itemlist[0] in top1_user_map):
                         for cand_user in top1_user_map[itemlist[0]]:
                             cand_Creation_Iter = t_buf.p_Creation_Iter[user_buf_map[cand_user]]
                             if (update_iter == 0) or (cand_Creation_Iter == update_iter):
