@@ -310,11 +310,11 @@ class SGDMachine(MFMachine):
                             new_n_buffers += 1
                             cur_buf += 1
 
-                            if itemlist[0] in top1_user_map:
-                                top1_user_map[itemlist[0]].append(i)
+                            if Y[0] in top1_user_map:
+                                top1_user_map[Y[0]].append(i)
                             else:
-                                top1_user_map[itemlist[0]] = [i]
-                                user_top1_map[i] = itemlist[0]
+                                top1_user_map[Y[0]] = [i]
+                                user_top1_map[i] = Y[0]
                         else:
                             t_buf.p_Buffer[user_buf_map[i]] = []
                             user_buf_map[i] = -1
