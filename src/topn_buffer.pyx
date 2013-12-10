@@ -74,4 +74,4 @@ class TopNBuffer:
         for u in xrange(M):
             self.p_Buffer[u] = []
             # self.p_LowerB[u] = []
-            self.p_ref_pt[u] = np.random.random_sample((D, 1))
+            self.p_ref_pt[u] = np.random.random_sample((D))
