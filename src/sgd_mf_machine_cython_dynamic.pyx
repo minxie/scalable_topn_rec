@@ -213,14 +213,10 @@ class SGDMachine(MFMachine):
                     sum_time_kdtr += end - start
                     sum_time_mtre += end - start
                     
-                    # Check whether we can reuse buffers
                     if not reuse_flag: # Create new buffer
                         user_buf_map[i] = cur_buf
-                        cur_buf += 1
                         np.copyto(t_buf.p_ref_pt[user_buf_map[i]], P[i])
                         t_buf.p_Creation_Iter[user_buf_map[i]] = update_iter
-                        total_n_buffers += 1
-                        new_n_buffers += 1
                         l_LowerB = []
 
                         if itemlist[0] in top1_user_map:
@@ -249,7 +245,8 @@ class SGDMachine(MFMachine):
                         
                             end = time.clock()
                             sum_time_mtre += end - start
-                        for c_iter in xrange(topn,N):
+                        success_flag = False
+                        for c_iter in xrange(topn,20):
                             start = time.clock()
                             # Calculate Lowerbound Valeu for new item
                             t_buf.p_Buffer[user_buf_map[i]].append(itemlist[c_iter])
@@ -283,8 +280,10 @@ class SGDMachine(MFMachine):
                             if total_num >= topn:
                                 sum_delta += c_iter - topn
                                 print str(c_iter - topn)
+                                success_Flag = True
                                 break
-                            elif c_iter == 19:
+                                
+                            if c_iter == 19:
                                 start = time.clock()
                                 partial_sort(itemlist.begin(), itemlist.begin()+100, itemlist.end())
                                 end = time.clock()
@@ -304,6 +303,12 @@ class SGDMachine(MFMachine):
                                 partial_sort(itemlist.begin(), itemlist.begin()+10000, itemlist.end())
                                 end = time.clock()                                
                                 sum_time_sort += end - start
+                        if success_flag:
+                            total_n_buffers += 1
+                            new_n_buffers += 1
+                            cur_buf += 1
+                        else:
+                            t_buf.p_Buffer[user_buf_map[i]] = []
 
                     
 
