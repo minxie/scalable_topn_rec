@@ -56,8 +56,8 @@ class Params:
                             help='# of deltas.')
         parser.add_argument('-N', nargs='?', dest='N', default=10, type=int,
                             help='# of items required.')
-        parser.add_argument('-t', nargs='?', dest='t', default=0.01, type=float,
-                            help='Delta percentage.')
+        parser.add_argument('-t', nargs='?', dest='t', default=0.001, type=float,
+                            help='Theta value.')
         args = parser.parse_args()
 
         self.p_D = args.d
