@@ -156,6 +156,8 @@ class SGDMachine(MFMachine):
             sum_time_mtre = 0
             
             for i in xrange(M):
+                print i
+                
                 start = time.clock()
                 X = P[i, ].dot(Q.T)
                 for j in xrange(N):
