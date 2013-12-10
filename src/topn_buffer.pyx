@@ -31,11 +31,7 @@ def UpperBound(t_buf, u, theta, t, t_pre, D, np.ndarray[np.float64_t, ndim=2] P,
                 lower[d] = -1 * upper[d]
                 upper[d] = -1 * tmp
                 value[d] = -1 * value[d]
-            B -= weight * lower[d]
-            print value[d]
-            print weight[d]
-            print lower[d]
-            print upper[d]
+            B -= weight[d] * lower[d]
             util.append([max((value[d] + theta) / weight[d], (value[d] - theta) / weight[d]), weight[d], upper[d]-lower[d]])
         util.sort(key=itemgetter(0), reverse=True)
         t_buf.p_util[map_id] = util
