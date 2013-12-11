@@ -125,6 +125,8 @@ class SGDMachine(MFMachine):
                     tmp_matrix = Q - tmp_Q
                     max_val_delta = np.amax(tmp_matrix, 0)
                     min_val_delta = np.amin(tmp_matrix, 0)
+                    print max_val_delta
+                    print min_val_delta
                     
                 # Update parameters
                 sgd_gamma *= params.p_step_dec
@@ -159,7 +161,7 @@ class SGDMachine(MFMachine):
             for i in xrange(M):
                 # print i
                 
-                if True:
+                if False:
                     start = time.clock()
                     reuse_flag = False
                     if (update_iter != 0) and (user_buf_map[i] != -1):
