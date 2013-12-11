@@ -158,180 +158,180 @@ class SGDMachine(MFMachine):
             sum_time_kdtr = 0
             sum_time_mtre = 0
             
-            for i in xrange(M):
-                # print i
+            # for i in xrange(M):
+            #     # print i
                 
-                if False:
-                    start = time.clock()
-                    reuse_flag = False
-                    if (update_iter != 0) and (user_buf_map[i] != -1):
-                        map_id = user_buf_map[i]
-                        my_p_ref_pt = t_buf.p_ref_pt[map_id]                        
-                        if (my_p_ref_pt - theta <= P[i]).all() and (P[i] <= my_p_ref_pt + theta).all():
-                            my_buf = t_buf.p_Buffer[map_id]
-                            my_UpperB = t_buf.p_UpperB[map_id]
-                            for d in xrange(params.p_D):
-                                my_UpperB += max(max_val_delta[d] * (my_p_ref_pt[d] + theta),
-                                                 min_val_delta[d] * (my_p_ref_pt[d] - theta))
-                            total_num = 0
-                            for cand_item in my_buf:
-                                if np.dot(Q[cand_item], P[i]) >= my_UpperB:
-                                    total_num += 1
-                            if total_num >= topn:
-                                resuse_flag = True
-                    end = time.clock()
-                    sum_time_sort += end - start
-                    sum_time_kdtr += end - start
-                    sum_time_mtre += end - start
+            #     if False:
+            #         start = time.clock()
+            #         reuse_flag = False
+            #         if (update_iter != 0) and (user_buf_map[i] != -1):
+            #             map_id = user_buf_map[i]
+            #             my_p_ref_pt = t_buf.p_ref_pt[map_id]                        
+            #             if (my_p_ref_pt - theta <= P[i]).all() and (P[i] <= my_p_ref_pt + theta).all():
+            #                 my_buf = t_buf.p_Buffer[map_id]
+            #                 my_UpperB = t_buf.p_UpperB[map_id]
+            #                 for d in xrange(params.p_D):
+            #                     my_UpperB += max(max_val_delta[d] * (my_p_ref_pt[d] + theta),
+            #                                      min_val_delta[d] * (my_p_ref_pt[d] - theta))
+            #                 total_num = 0
+            #                 for cand_item in my_buf:
+            #                     if np.dot(Q[cand_item], P[i]) >= my_UpperB:
+            #                         total_num += 1
+            #                 if total_num >= topn:
+            #                     resuse_flag = True
+            #         end = time.clock()
+            #         sum_time_sort += end - start
+            #         sum_time_kdtr += end - start
+            #         sum_time_mtre += end - start
 
-                    if not reuse_flag:
-                        start = time.clock()
-                        X = P[i, ].dot(Q.T)
-                        #for j in xrange(N):
-                        #    itemlist[j] = X[j]
-                        Y = (-X).argsort()[:20]
-                        # partial_sort(itemlist.begin(), itemlist.begin()+20, itemlist.end())
-                        end = time.clock()
-                        sum_time_sort += end - start
+            #         if not reuse_flag:
+            #             start = time.clock()
+            #             X = P[i, ].dot(Q.T)
+            #             #for j in xrange(N):
+            #             #    itemlist[j] = X[j]
+            #             Y = (-X).argsort()[:20]
+            #             # partial_sort(itemlist.begin(), itemlist.begin()+20, itemlist.end())
+            #             end = time.clock()
+            #             sum_time_sort += end - start
                         
-                    # if (not reuse_flag) and (itemlist[0] in top1_user_map):
-                    #     for cand_user in top1_user_map[itemlist[0]]:
-                    #         cand_Creation_Iter = t_buf.p_Creation_Iter[user_buf_map[cand_user]]
-                    #         if (update_iter == 0) or (cand_Creation_Iter == update_iter):
-                    #             if (P[cand_user] - theta <= P[i]).all() and (P[i] <= P[cand_user] + theta).all():
-                    #                 reuse_flag = True
-                    #                 user_buf_map[i] = user_buf_map[cand_user]
-                    #             elif user_top1_map[cand_user] == itemlist[0]:
-                    #                 map_id = user_buf_map[cand_user]
-                    #                 my_p_ref_pt = t_buf.p_ref_pt[map_id]
-                    #                 if (my_p_ref_pt - theta <= P[i]).all() and (P[i] <= my_p_ref_pt + theta).all():
-                    #                     my_buf = t_buf.p_Buffer[map_id]
-                    #                     my_UpperB = t_buf.p_UpperB[map_id]
-                    #                     for d in xrange(params.p_D):
-                    #                         my_UpperB += max(max_val_delta[d] * (my_p_ref_pt[d] + theta),
-                    #                                          min_val_delta[d] * (my_p_ref_pt[d] - theta))
-                    #                 total_num = 0
-                    #                 for cand_item in my_buf:
-                    #                     if np.dot(Q[cand_item], P[i]) >= my_UpperB:
-                    #                         total_num += 1
-                    #                 if total_num >= topn:
-                    #                     resuse_flag = True
-                    #                     user_buf_map[i] = map_id
+            #         # if (not reuse_flag) and (itemlist[0] in top1_user_map):
+            #         #     for cand_user in top1_user_map[itemlist[0]]:
+            #         #         cand_Creation_Iter = t_buf.p_Creation_Iter[user_buf_map[cand_user]]
+            #         #         if (update_iter == 0) or (cand_Creation_Iter == update_iter):
+            #         #             if (P[cand_user] - theta <= P[i]).all() and (P[i] <= P[cand_user] + theta).all():
+            #         #                 reuse_flag = True
+            #         #                 user_buf_map[i] = user_buf_map[cand_user]
+            #         #             elif user_top1_map[cand_user] == itemlist[0]:
+            #         #                 map_id = user_buf_map[cand_user]
+            #         #                 my_p_ref_pt = t_buf.p_ref_pt[map_id]
+            #         #                 if (my_p_ref_pt - theta <= P[i]).all() and (P[i] <= my_p_ref_pt + theta).all():
+            #         #                     my_buf = t_buf.p_Buffer[map_id]
+            #         #                     my_UpperB = t_buf.p_UpperB[map_id]
+            #         #                     for d in xrange(params.p_D):
+            #         #                         my_UpperB += max(max_val_delta[d] * (my_p_ref_pt[d] + theta),
+            #         #                                          min_val_delta[d] * (my_p_ref_pt[d] - theta))
+            #         #                 total_num = 0
+            #         #                 for cand_item in my_buf:
+            #         #                     if np.dot(Q[cand_item], P[i]) >= my_UpperB:
+            #         #                         total_num += 1
+            #         #                 if total_num >= topn:
+            #         #                     resuse_flag = True
+            #         #                     user_buf_map[i] = map_id
                     
-                    if not reuse_flag: # Create new buffer
-                        user_buf_map[i] = cur_buf
-                        np.copyto(t_buf.p_ref_pt[user_buf_map[i]], P[i])
-                        t_buf.p_Creation_Iter[user_buf_map[i]] = update_iter
-                        l_LowerB = []
+            #         if not reuse_flag: # Create new buffer
+            #             user_buf_map[i] = cur_buf
+            #             np.copyto(t_buf.p_ref_pt[user_buf_map[i]], P[i])
+            #             t_buf.p_Creation_Iter[user_buf_map[i]] = update_iter
+            #             l_LowerB = []
 
-                        for c_iter in xrange(topn):
-                            start = time.clock()
-                            t_buf.p_Buffer[user_buf_map[i]].append(Y[c_iter])
-                            LowerB = LowerBound(i, theta, Y[c_iter], D, P, Q)
-                            l_LowerB.append(LowerB)
-                            end = time.clock()
-                            sum_time_sort += end - start
-                            sum_time_kdtr += end - start
-                            sum_time_mtre += end - start
+            #             for c_iter in xrange(topn):
+            #                 start = time.clock()
+            #                 t_buf.p_Buffer[user_buf_map[i]].append(Y[c_iter])
+            #                 LowerB = LowerBound(i, theta, Y[c_iter], D, P, Q)
+            #                 l_LowerB.append(LowerB)
+            #                 end = time.clock()
+            #                 sum_time_sort += end - start
+            #                 sum_time_kdtr += end - start
+            #                 sum_time_mtre += end - start
                         
-                            # KD-Tree Retrieve next
-                            start = time.clock()
+            #                 # KD-Tree Retrieve next
+            #                 start = time.clock()
                             
-                            end = time.clock()
-                            sum_time_kdtr += end - start
-                            # M-Tree Retrieve next
-                            start = time.clock()
+            #                 end = time.clock()
+            #                 sum_time_kdtr += end - start
+            #                 # M-Tree Retrieve next
+            #                 start = time.clock()
                         
-                            end = time.clock()
-                            sum_time_mtre += end - start
-                        success_flag = False
-                        for c_iter in xrange(topn,20):
+            #                 end = time.clock()
+            #                 sum_time_mtre += end - start
+            #             success_flag = False
+            #             for c_iter in xrange(topn,20):
 
-                            if c_iter == topn:
-                                if (np.abs(Q[Y[topn]] - Q[Y[topn-1]] <= 0.001)).all():
-                                    break
+            #                 if c_iter == topn:
+            #                     if (np.abs(Q[Y[topn]] - Q[Y[topn-1]] <= 0.001)).all():
+            #                         break
                             
-                            start = time.clock()
-                            # Calculate Lowerbound Valeu for new item
-                            t_buf.p_Buffer[user_buf_map[i]].append(Y[c_iter])
-                            LowerB = LowerBound(i, theta, Y[c_iter], D, P, Q)
-                            l_LowerB.append(LowerB)
-                            # Calculate Upperbound Value
-                            UpperB = UpperBound(t_buf, i, theta, Y[c_iter], Y[topn-1], D, P, Q, min_val, max_val, c_iter, topn, user_buf_map[i])
-                            end = time.clock()
-                            sum_time_sort += end - start
-                            sum_time_kdtr += end - start
-                            sum_time_mtre += end - start
+            #                 start = time.clock()
+            #                 # Calculate Lowerbound Valeu for new item
+            #                 t_buf.p_Buffer[user_buf_map[i]].append(Y[c_iter])
+            #                 LowerB = LowerBound(i, theta, Y[c_iter], D, P, Q)
+            #                 l_LowerB.append(LowerB)
+            #                 # Calculate Upperbound Value
+            #                 UpperB = UpperBound(t_buf, i, theta, Y[c_iter], Y[topn-1], D, P, Q, min_val, max_val, c_iter, topn, user_buf_map[i])
+            #                 end = time.clock()
+            #                 sum_time_sort += end - start
+            #                 sum_time_kdtr += end - start
+            #                 sum_time_mtre += end - start
 
-                            # KD-Tree Retrieve next
-                            start = time.clock()
+            #                 # KD-Tree Retrieve next
+            #                 start = time.clock()
                             
-                            end = time.clock()
-                            sum_time_kdtr += end - start
-                            # M-Tree Retrieve next
-                            start = time.clock()
+            #                 end = time.clock()
+            #                 sum_time_kdtr += end - start
+            #                 # M-Tree Retrieve next
+            #                 start = time.clock()
                         
-                            end = time.clock()
-                            sum_time_mtre += end - start
+            #                 end = time.clock()
+            #                 sum_time_mtre += end - start
 
-                            start = time.clock()
-                            total_num = 0
-                            for cand_iter in xrange(len(l_LowerB)):
-                                if l_LowerB[cand_iter] >= UpperB:
-                                    total_num += 1
-                            end = time.clock()
+            #                 start = time.clock()
+            #                 total_num = 0
+            #                 for cand_iter in xrange(len(l_LowerB)):
+            #                     if l_LowerB[cand_iter] >= UpperB:
+            #                         total_num += 1
+            #                 end = time.clock()
 
-                            if total_num >= topn:
-                                sum_delta += c_iter - topn
-                                # print str(c_iter - topn)
-                                success_flag = True
-                                break
+            #                 if total_num >= topn:
+            #                     sum_delta += c_iter - topn
+            #                     # print str(c_iter - topn)
+            #                     success_flag = True
+            #                     break
                                 
-                            # if c_iter == 19:
-                            #     start = time.clock()
-                            #     partial_sort(iteml.begin(), itemlist.begin()+100, itemlist.end())
-                            #     end = time.clock()
-                            #     sum_time_sort += end - start
-                            # elif c_iter == 99:
-                            #     start = time.clock()
-                            #     partial_sort(itemlist.begin(), itemlist.begin()+500, itemlist.end())
-                            #     end = time.clock()
-                            #     sum_time_sort += end - start
-                            # elif c_iter == 499:
-                            #     start = time.clock()
-                            #     partial_sort(itemlist.begin(), itemlist.begin()+1000, itemlist.end())
-                            #     end = time.clock()                                
-                            #     sum_time_sort += end - start
-                            # elif c_iter == 999:
-                            #     start = time.clock()
-                            #     partial_sort(itemlist.begin(), itemlist.begin()+10000, itemlist.end())
-                            #     end = time.clock()                                
-                            #     sum_time_sort += end - start
-                        if success_flag:
-                            total_n_buffers += 1
-                            new_n_buffers += 1
-                            cur_buf += 1
+            #                 # if c_iter == 19:
+            #                 #     start = time.clock()
+            #                 #     partial_sort(iteml.begin(), itemlist.begin()+100, itemlist.end())
+            #                 #     end = time.clock()
+            #                 #     sum_time_sort += end - start
+            #                 # elif c_iter == 99:
+            #                 #     start = time.clock()
+            #                 #     partial_sort(itemlist.begin(), itemlist.begin()+500, itemlist.end())
+            #                 #     end = time.clock()
+            #                 #     sum_time_sort += end - start
+            #                 # elif c_iter == 499:
+            #                 #     start = time.clock()
+            #                 #     partial_sort(itemlist.begin(), itemlist.begin()+1000, itemlist.end())
+            #                 #     end = time.clock()                                
+            #                 #     sum_time_sort += end - start
+            #                 # elif c_iter == 999:
+            #                 #     start = time.clock()
+            #                 #     partial_sort(itemlist.begin(), itemlist.begin()+10000, itemlist.end())
+            #                 #     end = time.clock()                                
+            #                 #     sum_time_sort += end - start
+            #             if success_flag:
+            #                 total_n_buffers += 1
+            #                 new_n_buffers += 1
+            #                 cur_buf += 1
 
-                            if Y[0] in top1_user_map:
-                                top1_user_map[Y[0]].append(i)
-                            else:
-                                top1_user_map[Y[0]] = [i]
-                                user_top1_map[i] = Y[0]
-                        else:
-                            t_buf.p_Buffer[user_buf_map[i]] = []
-                            user_buf_map[i] = -1
+            #                 if Y[0] in top1_user_map:
+            #                     top1_user_map[Y[0]].append(i)
+            #                 else:
+            #                     top1_user_map[Y[0]] = [i]
+            #                     user_top1_map[i] = Y[0]
+            #             else:
+            #                 t_buf.p_Buffer[user_buf_map[i]] = []
+            #                 user_buf_map[i] = -1
 
                     
 
 
-            print "Top-N Time: " + str(sum_time_sort) + ' ' + str(sum_time_kdtr) + ' ' + str(sum_time_mtre)
-            oid.write(' ' + str(sum_time_sort))
-            oid.write(' ' + str(sum_time_kdtr))
-            oid.write(' ' + str(sum_time_mtre))
-            oid.write(' ' + str(total_n_buffers))
-            oid.write(' ' + str(new_n_buffers))
-            oid.write(' ' + str(sum_delta))
-            oid.write(' ' + str(sum_delta / total_n_buffers))
+            # print "Top-N Time: " + str(sum_time_sort) + ' ' + str(sum_time_kdtr) + ' ' + str(sum_time_mtre)
+            # oid.write(' ' + str(sum_time_sort))
+            # oid.write(' ' + str(sum_time_kdtr))
+            # oid.write(' ' + str(sum_time_mtre))
+            # oid.write(' ' + str(total_n_buffers))
+            # oid.write(' ' + str(new_n_buffers))
+            # oid.write(' ' + str(sum_delta))
+            # oid.write(' ' + str(sum_delta / total_n_buffers))
 
         oid.write('\n')
         oid.close()
