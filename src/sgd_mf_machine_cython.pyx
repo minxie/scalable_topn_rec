@@ -117,7 +117,7 @@ class SGDMachine(MFMachine):
                 Y = (-X).argsort()
                 cur_topn = 0
                 for j in xrange(N):
-                    if not Y[j] in user_item_map[i]:
+                    if (not i in user_item_map) or (not Y[j] in user_item_map[i]):
                         if cur_topn == 0:
                             rid.write(str(Y[j]))
                         else:
