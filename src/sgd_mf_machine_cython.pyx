@@ -114,18 +114,19 @@ class SGDMachine(MFMachine):
             # X = P.dot(Q.T)
             for i in xrange(M):
                 X = P[i, ].dot(Q.T)
-                Y = (-X).argsort()
-                cur_topn = 0
-                for j in xrange(N):
-                    if not j in user_item_map[i]:
-                        if cur_topn == 0:
-                            rid.write(str(j))
-                        else:
-                            rid.write(' ' + str(j))
-                        cur_topn += 1
-                        if cur_topn == topn:
-                            break
-                rid.write('\n')
+                Y = (-X).argsort()[:10]
+                print Y
+                # cur_topn = 0
+                # for j in xrange(N):
+                #     if not j in user_item_map[i]:
+                #         if cur_topn == 0:
+                #             rid.write(str(j))
+                #         else:
+                #             rid.write(' ' + str(j))
+                #         cur_topn += 1
+                #         if cur_topn == topn:
+                #             break
+                # rid.write('\n')
                 
                 #for j in xrange(N):
                     # itemlist[j] = P[i, ].dot(Q[j, ])
