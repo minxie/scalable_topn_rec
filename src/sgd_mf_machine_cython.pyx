@@ -125,6 +125,7 @@ class SGDMachine(MFMachine):
                         cur_topn += 1
                         if cur_topn == topn:
                             break
+                rid.write('\n')
                 
                 #for j in xrange(N):
                     # itemlist[j] = P[i, ].dot(Q[j, ])
@@ -137,7 +138,6 @@ class SGDMachine(MFMachine):
             print "Top-N Time: " + str(end - start)
             oid.write(' ' + str(end - start))
 
-            rid.write('\n')
             rid.close()
 
         oid.write('\n')
