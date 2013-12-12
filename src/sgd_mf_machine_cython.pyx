@@ -55,12 +55,16 @@ class SGDMachine(MFMachine):
 
         oid = open(params.p_res_log_f_loc, 'a')
         oid.write(str(params.p_D))
+
+        user_item_map = dict()
         
         for update_iter in xrange(c + 1):
             print "Iteration: " + str(update_iter)
             print str(len(data.ratings)) + " " + str(len(data.ratings) * (a + b * c))
             processing_order = range(int(len(data.ratings) * (a + b * update_iter)))
 
+            rid = open(params.p_res_log_f_loc+str(update_iter), 'a')
+            
             # Training Phase
             start = time.clock()
             for tr_iter in xrange(params.p_max_i):
@@ -82,6 +86,11 @@ class SGDMachine(MFMachine):
                                                    - sgd_lambda * P[user, i])
                         Q[item, i] += sgd_gamma * (err * P[user, i]
                                                    - sgd_lambda * Q[item, i])
+
+                    if not user in user_item_map:
+                        user_item_map[user] = {item:1}
+                    elif not item in user_item_map[user]:
+                        user_item_map[user][item] = 1
 
                 # Update parameters
                 sgd_gamma *= params.p_step_dec
@@ -105,7 +114,18 @@ class SGDMachine(MFMachine):
             # X = P.dot(Q.T)
             for i in xrange(M):
                 X = P[i, ].dot(Q.T)
-                Y = (-X).argsort()[:20]
+                Y = (-X).argsort()
+                cur_topn = 0
+                for j in xrange(N):
+                    if not j in user_item_map[i]:
+                        if cur_topn == 0:
+                            rid.write(str(j))
+                        else:
+                            rid.write(' ' + str(j))
+                        cur_topn += 1
+                        if cur_topn == topn:
+                            break
+                
                 #for j in xrange(N):
                     # itemlist[j] = P[i, ].dot(Q[j, ])
                 #    itemlist[j] = X[j]
@@ -116,6 +136,9 @@ class SGDMachine(MFMachine):
             end = time.clock()
             print "Top-N Time: " + str(end - start)
             oid.write(' ' + str(end - start))
+
+            rid.write('\n')
+            rid.close()
 
         oid.write('\n')
         oid.close()
