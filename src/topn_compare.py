@@ -15,7 +15,7 @@ def read_file(filename, ratings):
     fid.close()
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description=title)
+    parser = argparse.ArgumentParser(description="")
     parser.add_argument('-infile', nargs='?', dest='infile', default="", type=str,
                         help='Input File location.')
     parser.add_argument('-oufile', nargs='?', dest='oufile', default="", type=str,
