@@ -36,7 +36,7 @@ if __name__ == "__main__":
             for pos in xrange(10):
                 if topn_res[iteration][pos] != topn_res[iteration+1][pos]:
                     total_change[pos] += 1
-                totol[pos] += 1
+                total[pos] += 1
 
         for pos in xrange(10):
             oid.write(str(total_change) + '/' + str(total) + ' ')
