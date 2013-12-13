@@ -39,7 +39,7 @@ if __name__ == "__main__":
                 total[pos] += 1
 
         for pos in xrange(10):
-            oid.write(str(total_change) + '/' + str(total) + ' ')
+            oid.write(str(total_change[pos]) + '/' + str(total[pos]) + ' ')
         oid.write('\n')
 
     oid.close()
