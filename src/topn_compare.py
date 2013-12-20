@@ -27,18 +27,14 @@ if __name__ == "__main__":
 
     topn_res = [[],[],[],[],[],[]]
     read_file(filename+str(0), topn_res[0])
-    print topn_res[0][0]
     for iteration in xrange(4):
         read_file(filename+str(iteration+1), topn_res[iteration+1])
-        print topn_res[iteration+1][0]
 
         total = [0] * 10
         total_change = [0] * 10
         for u in xrange(len(topn_res[iteration])):
-            if iteration == 1:
-                print str(topn_res[iteration][0]) + ' ' + str(topn_res[iteration+1][0])
             for pos in xrange(10):
-                if topn_res[iteration][pos] != topn_res[iteration+1][pos]:
+                if topn_res[iteration][u][pos] != topn_res[iteration+1][u][pos]:
                     total_change[pos] += 1
                 total[pos] += 1
 
