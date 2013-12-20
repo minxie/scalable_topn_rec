@@ -33,6 +33,8 @@ if __name__ == "__main__":
         total = [0] * 10
         total_change = [0] * 10
         for u in xrange(len(topn_res[iteration])):
+            if iteration == 1:
+                print str(topn_res[iteration][pos]) + ' ' + str(topn_res[iteration+1][pos])
             for pos in xrange(10):
                 if topn_res[iteration][pos] != topn_res[iteration+1][pos]:
                     total_change[pos] += 1
