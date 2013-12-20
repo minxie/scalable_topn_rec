@@ -27,8 +27,10 @@ if __name__ == "__main__":
 
     topn_res = [[],[],[],[],[],[]]
     read_file(filename+str(0), topn_res[0])
+    print topn_res[0][0]
     for iteration in xrange(4):
         read_file(filename+str(iteration+1), topn_res[iteration+1])
+        print topn_res[iteration+1][0]
 
         total = [0] * 10
         total_change = [0] * 10
