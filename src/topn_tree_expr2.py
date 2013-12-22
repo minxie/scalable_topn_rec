@@ -37,13 +37,13 @@ if __name__ == "__main__":
     #print(len(h_counter_global))
     #for i in xrange(10):
 
-    # sorted_x = sorted(h_counter_position[i].iteritems(), key=operator.itemgetter(1))
-    # for x in sorted_x:
-    #     print x
-
-    sorted_x = sorted(h_counter_global.iteritems(), key=operator.itemgetter(1))
+    sorted_x = sorted(h_counter_position[i].iteritems(), key=operator.itemgetter(1))
     for x in sorted_x:
         print x
+
+    # sorted_x = sorted(h_counter_global.iteritems(), key=operator.itemgetter(1))
+    # for x in sorted_x:
+    #     print x
     
     # print(h_counter_position[args.p])
 
