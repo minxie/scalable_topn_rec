@@ -50,7 +50,7 @@ if __name__ == "__main__":
         oid.write(str(cur_node.p_item) + '\n')
         if not cur_node.p_children is None:
             for child_node in cur_node.p_children:
-                node_stack.push([child_node, level+1])
+                node_stack.append([child_node, level+1])
 
     oid.close()
     iid.close()
