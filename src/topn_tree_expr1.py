@@ -5,6 +5,7 @@ class topn_tree_node:
     def __init__(self, item):
         self.p_item = item
         self.p_children = None
+        self.p_popularity = 1
 
 
 if __name__ == "__main__":
@@ -16,7 +17,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     iid = open(args.infile, 'r')
-    oid = open(args.oufile, 'a')
+    oid = open(args.oufile, 'w')
 
     tree_root = topn_tree_node(-1)
     
@@ -36,21 +37,30 @@ if __name__ == "__main__":
                 for child_node in cur_node.p_children:
                     if child_node.p_item == item:
                         cur_node = child_node
+                        cur_node.p_popularity += 1
+                        break
                 if tmp_node == cur_node: # Didn't find match
                     child_node = topn_tree_node(item)
                     cur_node.p_children.append(child_node)
                     cur_node = child_node
 
+    branch_num = 0
+                    
     node_stack = []
     node_stack.append([tree_root, 0])
     while node_stack:
         cur_node, level = node_stack.pop()
-        for i in xrange(level):
-            oid.write('-')
-        oid.write(str(cur_node.p_item) + '\n')
+        if level == 10:
+            branch_num += 1
+            print(cur_node.p_popularity)
+        #for i in xrange(level):
+        #    oid.write('-')
+        #oid.write(str(cur_node.p_item) + '\n')
         if not cur_node.p_children is None:
             for child_node in cur_node.p_children:
                 node_stack.append([child_node, level+1])
+
+    print branch_num
 
     oid.close()
     iid.close()
