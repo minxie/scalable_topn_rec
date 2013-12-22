@@ -1,4 +1,5 @@
 import argparse
+import operator
 
 
 if __name__ == "__main__":
@@ -35,6 +36,11 @@ if __name__ == "__main__":
 
     #print(len(h_counter_global))
     #for i in xrange(10):
-    print(h_counter_position[args.p])
+
+    sorted_x = sorted(h_counter_position[i].iteritems(), key=operator.itemgetter(1))
+    for x in sorted_x:
+        print x
+    
+    # print(h_counter_position[args.p])
 
     iid.close()
