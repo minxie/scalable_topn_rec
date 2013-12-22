@@ -7,6 +7,8 @@ if __name__ == "__main__":
                         help='Input File location.')
     parser.add_argument('-oufile', nargs='?', dest='oufile', default="", type=str,
                         help='Output File location.')
+    parser.add_argument('-p', nargs='?', dest='p', default=0, type=int,
+                        help='Position.')
     args = parser.parse_args()
 
     iid = open(args.infile, 'r')
@@ -23,12 +25,16 @@ if __name__ == "__main__":
 
             if not item in h_counter_global:
                 h_counter_global[item] = 1
+            else:
+                h_counter_global[item] += 1
 
             if not item in h_counter_position[i]:
                 h_counter_position[i][item] = 1
+            else:
+                h_counter_position[i][item] += 1
 
-    print(len(h_counter_global))
-    for i in xrange(10):
-        print(len(h_counter_position[i]))
+    #print(len(h_counter_global))
+    #for i in xrange(10):
+    print(h_counter_position[args.p])
 
     iid.close()
