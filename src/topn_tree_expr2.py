@@ -18,7 +18,6 @@ if __name__ == "__main__":
     for line in iid:
         line = line.rstrip()
         fields = line.split()
-        cur_node = tree_root
         for i in xrange(10):
             item = int(fields[i])
 
