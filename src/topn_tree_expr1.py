@@ -4,7 +4,7 @@ import argparse
 class topn_tree_node:
     def __init__(self, item):
         self.p_item = item
-        self.p_children = NULL
+        self.p_children = None
 
 
 if __name__ == "__main__":
@@ -26,7 +26,7 @@ if __name__ == "__main__":
         cur_node = tree_root
         for field in fields:
             item = int(field)
-            if cur_node.p_children == NULL:
+            if cur_node.p_children is None:
                 cur_node.p_children = []
                 child_node = topn_tree_node(item)
                 cur_node.p_children.append(child_node)
@@ -48,7 +48,7 @@ if __name__ == "__main__":
         for i in xrange(level):
             oid.write('-')
         oid.write(str(cur_node.p_item) + '\n')
-        if cur_node.p_children != NULL:
+        if not cur_node.p_children is None:
             for child_node in cur_node.p_children:
                 node_stack.push([child_node, level+1])
 
