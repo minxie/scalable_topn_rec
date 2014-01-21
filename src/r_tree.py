@@ -43,6 +43,8 @@ class RTree:
         for ti in xrange(n):
             lbound = np.minimum(Q[ti], lbound)
             rbound = np.maximum(Q[ti], rbound)
+        # print lbound
+        # print rbound
 
         max_val = -10000
         max_idx = 0
@@ -56,35 +58,35 @@ class RTree:
         copy = sorted(copy, key=itemgetter(1))
 
         lnode_list = []
-        for lnodei in xrange(math.ceil(n / NODE_SIZE)):
-            l_tids = tids[lnodei * NODE_SIZE:min(lnodei * NODE_SIZE + NODE_SIZE, n - 1)]
+        for lnodei in xrange(int(math.ceil(n / NODE_SIZE))):
+            l_tids = [x for x, y in copy[lnodei * NODE_SIZE:min(lnodei * NODE_SIZE + NODE_SIZE + 1, n)]]
             lbound = np.array([10000] * m)
             rbound = np.array([-10000] * m)
             for tid in l_tids:
                 lbound = np.minimum(Q[tid], lbound)
                 rbound = np.maximum(Q[tid], rbound)
 
-            n = Node()
-            n._lbound = lbound
-            n._rbound = rbound
-            n._count = len(l_tids)
-            n._tids = l_tids
-            lnode_list.append(n)
+            node = Node()
+            node._lbound = lbound
+            node._rbound = rbound
+            node._count = len(l_tids)
+            node._tids = l_tids
+            lnode_list.append(node)
 
         cnode_list = []
         while len(lnode_list) > NODE_SIZE:
-            for cnodei in xrange(math.ceil(len(lnode_list) / NODE_SIZE)):
-                n = Node()
+            for cnodei in xrange(int(math.ceil(len(lnode_list) / NODE_SIZE))):
+                node = Node()
                 lbound = np.array([10000] * m)
                 rbound = np.array([-10000] * m)
-                for lnodei in xrange(cnodei, min(cnodei + NODE_SIZE, n - 1)):
-                    n._children.append(lnode_list[lnodei])
+                for lnodei in xrange(cnodei * NODE_SIZE, min(cnodei * NODE_SIZE + NODE_SIZE + 1, len(lnode_list))):
+                    node._children.append(lnode_list[lnodei])
                     lbound = np.minimum(lnode_list[lnodei]._lbound, lbound)
                     rbound = np.maximum(lnode_list[lnodei]._rbound, rbound)
-                    n._count += lnode_list[lnodei]._count
-                n._lbound = lbound
-                n._rbound = rbound
-                cnode_list.append(n)
+                    node._count += lnode_list[lnodei]._count
+                node._lbound = lbound
+                node._rbound = rbound
+                cnode_list.append(node)
             lnode_list = cnode_list
             cnode_list = []
 
@@ -92,10 +94,10 @@ class RTree:
         lbound = np.array([10000] * m)
         rbound = np.array([-10000] * m)
         for lnode in lnode_list:
-            n_root._children.append(lnode_list[lnodei])
-            lbound = np.minimum(lnode_list[lnodei]._lbound, lbound)
-            rbound = np.maximum(lnode_list[lnodei]._rbound, rbound)
-            n_root._count += lnode_list[lnodei]._count
+            n_root._children.append(lnode)
+            lbound = np.minimum(lnode._lbound, lbound)
+            rbound = np.maximum(lnode._rbound, rbound)
+            n_root._count += lnode._count
         n_root._lbound = lbound
         n_root._rbound = rbound
 
@@ -148,18 +150,18 @@ if __name__ == "__main__":
     Unit test procedure
     """
     T = RTree()
-    Q = np.random.random_sample([100, 2])
+    Q = np.random.random_sample([10000, 2])
     # print Q
 
-    T.create_index(Q, 100, 2)
+    T.create_index(Q, 10000, 2)
     # T.print_index()
 
     u = np.array([0.1, -0.1])
     maxval = -1
-    for i in xrange(100):
+    for i in xrange(10000):
         maxval = max(maxval, Q[i].dot(u))
     print maxval
 
     res = T.top_item(u, 1)
-    print Q[res[1]]
-    print Q[res[1]].dot(u)
+    #print Q[res[0]]
+    print Q[res[0]].dot(u)
