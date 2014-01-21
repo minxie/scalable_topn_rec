@@ -160,6 +160,6 @@ if __name__ == "__main__":
         maxval = max(maxval, Q[i].dot(u))
     print maxval
 
-    res = T.top_item(u, 2)
+    res = T.top_item(u, 1)
     print Q[res[1]]
     print Q[res[1]].dot(u)
